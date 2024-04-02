@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0j2kfa8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0j2kfa8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:collaboration id="System">
     <bpmn:participant id="Participant_127gsyv" name="Obsługa procesu zakupu" processRef="Process_191x0oj" />
   </bpmn:collaboration>
@@ -39,18 +39,18 @@
       <bpmn:incoming>Flow_0l35an2</bpmn:incoming>
       <bpmn:outgoing>Flow_0wcyvwq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="Activity_1gyml9y" name="Obsługa zapłaty kartą">
+    <bpmn:serviceTask id="Activity_1gyml9y" name="Obsługa zapłaty kartą" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_0t1mbpr</bpmn:incoming>
       <bpmn:outgoing>Flow_00993uv</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_120syna" name="Obsługa zapłaty przelewem">
+    <bpmn:serviceTask id="Activity_120syna" name="Obsługa zapłaty przelewem" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_1sdqaiu</bpmn:incoming>
       <bpmn:outgoing>Flow_0l35an2</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="Event_0en0vfy" name="Koniec procesu">
       <bpmn:incoming>Flow_1t9v8fz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0mfyfht" name="Wyślij podsumowanie">
+    <bpmn:serviceTask id="Activity_0mfyfht" name="Wyślij podsumowanie" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_0tc2i9q</bpmn:incoming>
       <bpmn:outgoing>Flow_1t9v8fz</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -60,8 +60,12 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_012q3j0" sourceRef="StartEvent_1" targetRef="Activity_0ttrak4" />
     <bpmn:sequenceFlow id="Flow_0cr3adr" sourceRef="Activity_0ttrak4" targetRef="Gateway_0fofovt" />
-    <bpmn:sequenceFlow id="Flow_0t1mbpr" name="Zapłata kartą" sourceRef="Gateway_0fofovt" targetRef="Activity_1gyml9y" />
-    <bpmn:sequenceFlow id="Flow_1sdqaiu" name="Zapłata przelewem" sourceRef="Gateway_0fofovt" targetRef="Activity_120syna" />
+    <bpmn:sequenceFlow id="Flow_0t1mbpr" name="Zapłata kartą" sourceRef="Gateway_0fofovt" targetRef="Activity_1gyml9y">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1sdqaiu" name="Zapłata przelewem" sourceRef="Gateway_0fofovt" targetRef="Activity_120syna">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00993uv" sourceRef="Activity_1gyml9y" targetRef="Gateway_1t86uw2" />
     <bpmn:sequenceFlow id="Flow_0l35an2" sourceRef="Activity_120syna" targetRef="Gateway_1t86uw2" />
     <bpmn:sequenceFlow id="Flow_0wcyvwq" sourceRef="Gateway_1t86uw2" targetRef="Activity_10r6a0g" />
@@ -74,16 +78,16 @@
         <dc:Bounds x="155" y="82" width="1365" height="856" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1iuapft_di" bpmnElement="Lane_1iuapft" isHorizontal="true">
-        <dc:Bounds x="185" y="82" width="1335" height="285" />
+      <bpmndi:BPMNShape id="Lane_04cbcen_di" bpmnElement="Lane_04cbcen" isHorizontal="true">
+        <dc:Bounds x="185" y="652" width="1335" height="286" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1dy2z53_di" bpmnElement="Lane_1dy2z53" isHorizontal="true">
         <dc:Bounds x="185" y="367" width="1335" height="285" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_04cbcen_di" bpmnElement="Lane_04cbcen" isHorizontal="true">
-        <dc:Bounds x="185" y="652" width="1335" height="286" />
+      <bpmndi:BPMNShape id="Lane_1iuapft_di" bpmnElement="Lane_1iuapft" isHorizontal="true">
+        <dc:Bounds x="185" y="82" width="1335" height="285" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -161,13 +165,13 @@
         <di:waypoint x="855" y="198" />
         <di:waypoint x="940" y="198" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0tc2i9q_di" bpmnElement="Flow_0tc2i9q">
-        <di:waypoint x="1040" y="198" />
-        <di:waypoint x="1120" y="198" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1t9v8fz_di" bpmnElement="Flow_1t9v8fz">
         <di:waypoint x="1220" y="198" />
         <di:waypoint x="1312" y="198" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tc2i9q_di" bpmnElement="Flow_0tc2i9q">
+        <di:waypoint x="1040" y="198" />
+        <di:waypoint x="1120" y="198" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
