@@ -24,9 +24,11 @@
         <bpmn:flowNodeRef>Activity_0rau05l</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_0jrjrtn" name="Nie" sourceRef="Gateway_0gynz9u" targetRef="Activity_034v494" />
+    <bpmn:sequenceFlow id="Flow_0jrjrtn" name="Nie" sourceRef="Gateway_0gynz9u" targetRef="Activity_034v494">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not karta}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0f8ryjr" name="Tak" sourceRef="Gateway_0gynz9u" targetRef="Activity_04oastw">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${karta}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ar7jiy" sourceRef="Activity_0rau05l" targetRef="Gateway_0gynz9u" />
     <bpmn:sequenceFlow id="Flow_1wk4xrw" sourceRef="Event_1o8i2le" targetRef="Activity_0rau05l" />
