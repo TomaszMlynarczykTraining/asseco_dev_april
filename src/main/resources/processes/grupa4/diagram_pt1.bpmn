@@ -53,11 +53,11 @@
     <bpmn:sequenceFlow id="Flow_0z8lzoc" sourceRef="Gateway_08pjm3c" targetRef="Activity_00ftgep" />
     <bpmn:sequenceFlow id="Flow_16ph4i7" sourceRef="Activity_00ftgep" targetRef="Activity_01k69n0" />
     <bpmn:sequenceFlow id="Flow_0viut2q" sourceRef="Activity_01k69n0" targetRef="Event_08qnowh" />
-    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą">
+    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą" camunda:delegateExpression="${true}">
       <bpmn:incoming>Flow_1bpxjru</bpmn:incoming>
       <bpmn:outgoing>Flow_00iczr6</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0y6jw1j" name="obsłuż płatność przelewem">
+    <bpmn:serviceTask id="Activity_0y6jw1j" name="obsłuż płatność przelewem" camunda:delegateExpression="${true}">
       <bpmn:incoming>Flow_1xwj4ui</bpmn:incoming>
       <bpmn:outgoing>Flow_1ivel1l</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -65,7 +65,7 @@
       <bpmn:incoming>Flow_0z8lzoc</bpmn:incoming>
       <bpmn:outgoing>Flow_16ph4i7</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sendTask id="Activity_01k69n0" name="wyślij podsumowanie">
+    <bpmn:sendTask id="Activity_01k69n0" name="wyślij podsumowanie" camunda:delegateExpression="${true}">
       <bpmn:incoming>Flow_16ph4i7</bpmn:incoming>
       <bpmn:outgoing>Flow_0viut2q</bpmn:outgoing>
     </bpmn:sendTask>
