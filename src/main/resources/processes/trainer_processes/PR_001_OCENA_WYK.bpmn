@@ -10,8 +10,8 @@
         <bpmn:flowNodeRef>PR_002_GT_CZY_OFERTA_WYK</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_10vq2so" name="Klient\dział handlowy">
-        <bpmn:flowNodeRef>PR_002_UT_ZLOZENIE_ZAM</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>PR_002_UT_ZLOZENIE_ZAM</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_17lr976" name="System">
         <bpmn:flowNodeRef>Activity_0hsik8j</bpmn:flowNodeRef>
@@ -32,10 +32,6 @@
       <bpmn:outgoing>Flow_1g2w3iq</bpmn:outgoing>
       <bpmn:outgoing>Flow_0u1496u</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="PR_002_UT_ZLOZENIE_ZAM" name="Złożenie zamówienia">
-      <bpmn:incoming>Flow_09034lx</bpmn:incoming>
-      <bpmn:outgoing>Flow_10x26fx</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:startEvent id="StartEvent_1" name="Start procesu">
       <bpmn:outgoing>Flow_09034lx</bpmn:outgoing>
     </bpmn:startEvent>
@@ -67,6 +63,10 @@
     <bpmn:sequenceFlow id="Flow_17xa5au" sourceRef="Activity_0hsik8j" targetRef="Activity_1qqbrn1" />
     <bpmn:sequenceFlow id="Flow_0hj4ukd" sourceRef="Activity_1qqbrn1" targetRef="Event_16zcl97" />
     <bpmn:sequenceFlow id="Flow_0iild0f" sourceRef="Activity_1980vaw" targetRef="Event_1x7niqk" />
+    <bpmn:userTask id="PR_002_UT_ZLOZENIE_ZAM" name="Złożenie zamówienia">
+      <bpmn:incoming>Flow_09034lx</bpmn:incoming>
+      <bpmn:outgoing>Flow_10x26fx</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_0v6z0eq">
       <bpmn:text>Skąd wziąć dane do sprawdzenia?</bpmn:text>
     </bpmn:textAnnotation>
@@ -107,10 +107,6 @@
           <dc:Bounds x="614" y="125" width="72" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0bz1bb0_di" bpmnElement="PR_002_UT_ZLOZENIE_ZAM">
-        <dc:Bounds x="310" y="309" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="232" y="331" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -138,14 +134,17 @@
           <dc:Bounds x="1018" y="775" width="85" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bz1bb0_di" bpmnElement="PR_002_UT_ZLOZENIE_ZAM">
+        <dc:Bounds x="330" y="309" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1l01ujf_di" bpmnElement="Association_1l01ujf">
         <di:waypoint x="460" y="167" />
         <di:waypoint x="380" y="147" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10x26fx_di" bpmnElement="Flow_10x26fx">
-        <di:waypoint x="410" y="349" />
-        <di:waypoint x="435" y="349" />
-        <di:waypoint x="435" y="179" />
+        <di:waypoint x="380" y="309" />
+        <di:waypoint x="380" y="179" />
         <di:waypoint x="460" y="179" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0egkmfb_di" bpmnElement="Flow_0egkmfb">
@@ -170,7 +169,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_09034lx_di" bpmnElement="Flow_09034lx">
         <di:waypoint x="268" y="349" />
-        <di:waypoint x="310" y="349" />
+        <di:waypoint x="330" y="349" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_17xa5au_di" bpmnElement="Flow_17xa5au">
         <di:waypoint x="830" y="650" />
