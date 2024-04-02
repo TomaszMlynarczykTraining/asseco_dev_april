@@ -12,7 +12,7 @@ server.port: 8081
 
 camunda:
   bpm:
-    deployment-resource-pattern: classpath*:processes/trainer_processes/*.bpmn
+    deployment-resource-pattern: classpath*:processes/grupa2/*.bpmn
 
 camunda.bpm.admin-user:
   id: demo
