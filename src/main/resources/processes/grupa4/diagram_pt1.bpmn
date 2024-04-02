@@ -43,10 +43,10 @@
     <bpmn:sequenceFlow id="Flow_1yym04z" sourceRef="StartEvent_1" targetRef="Activity_1sgki8l" />
     <bpmn:sequenceFlow id="Flow_1cz2qkh" sourceRef="Activity_1sgki8l" targetRef="Gateway_0psei8m" />
     <bpmn:sequenceFlow id="Flow_1bpxjru" name="karta" sourceRef="Gateway_0psei8m" targetRef="Activity_1tsnb4g">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">false</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1xwj4ui" name="przelew" sourceRef="Gateway_0psei8m" targetRef="Activity_0y6jw1j">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">true</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00iczr6" sourceRef="Activity_1tsnb4g" targetRef="Gateway_08pjm3c" />
     <bpmn:sequenceFlow id="Flow_1ivel1l" sourceRef="Activity_0y6jw1j" targetRef="Gateway_08pjm3c" />
