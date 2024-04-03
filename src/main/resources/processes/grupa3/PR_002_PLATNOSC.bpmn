@@ -73,13 +73,13 @@
       <bpmn:incoming>Flow_0rsryum</bpmn:incoming>
       <bpmn:outgoing>Flow_1d5ynvc</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0rau05l" name="Wybierz rodzaj płatności" camunda:formRef="isCardPaymentForm" camunda:formRefBinding="latest">
-      <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
-      <bpmn:outgoing>Flow_1ar7jiy</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_026h9x9" name="Wyślij podsumowanie" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_0xll0et</bpmn:incoming>
       <bpmn:outgoing>Flow_07047j3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0rau05l" name="Wybierz rodzaj płatności" camunda:delegateExpression="${paymentGatewayDelegate}">
+      <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ar7jiy</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -143,11 +143,11 @@
       <bpmndi:BPMNShape id="Activity_0jd75yo_di" bpmnElement="Activity_0gd81zz">
         <dc:Bounds x="740" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ldf39r_di" bpmnElement="Activity_0rau05l">
-        <dc:Bounds x="260" y="120" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0cf1rhi_di" bpmnElement="Activity_026h9x9">
         <dc:Bounds x="980" y="670" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rjgtho_di" bpmnElement="Activity_0rau05l">
+        <dc:Bounds x="260" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0jrjrtn_di" bpmnElement="Flow_0jrjrtn">
         <di:waypoint x="430" y="185" />
