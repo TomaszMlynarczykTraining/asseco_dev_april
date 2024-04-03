@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_181wleu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:collaboration id="Collaboration_1vhdt3s">
-    <bpmn:participant id="Participant_0vn9spt" processRef="Process_1e72ewh35" />
+    <bpmn:participant id="Participant_0vn9spt" processRef="PR_GR4_PAYMENT" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1e72ewh35" isExecutable="true" camunda:historyTimeToLive="180">
+  <bpmn:process id="PR_GR4_PAYMENT" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_12ppufk">
       <bpmn:lane id="Lane_0b5k7p7">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -53,7 +53,13 @@
     <bpmn:sequenceFlow id="Flow_0z8lzoc" sourceRef="Gateway_08pjm3c" targetRef="Activity_00ftgep" />
     <bpmn:sequenceFlow id="Flow_16ph4i7" sourceRef="Activity_00ftgep" targetRef="Activity_01k69n0" />
     <bpmn:sequenceFlow id="Flow_0viut2q" sourceRef="Activity_01k69n0" targetRef="Event_08qnowh" />
-    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą" camunda:delegateExpression="${mockDelegate}">
+    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą" camunda:delegateExpression="${ptDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_pt1">ZMienna procesowa AS</camunda:inputParameter>
+          <camunda:outputParameter name="OUT_ZMIENNA_PAY_CARD">${zmienna_pt1}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1bpxjru</bpmn:incoming>
       <bpmn:outgoing>Flow_00iczr6</bpmn:outgoing>
     </bpmn:serviceTask>
