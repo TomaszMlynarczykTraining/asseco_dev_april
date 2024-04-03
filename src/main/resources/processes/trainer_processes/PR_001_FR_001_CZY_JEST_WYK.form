@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "text": "# Czy oferta jest wykonywalna?",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1w2j50s",
+        "columns": null
+      },
+      "id": "Field_04ae5av"
+    },
+    {
+      "label": "Oferta wykonywalna?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_15pdiij",
+        "columns": null
+      },
+      "id": "Field_13v0pqa",
+      "key": "isOfferApplicable",
+      "validate": {
+        "required": false
+      }
+    }
+  ],
+  "type": "default",
+  "id": "PR_001_FR_001_CZY_JEST_WYK",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
