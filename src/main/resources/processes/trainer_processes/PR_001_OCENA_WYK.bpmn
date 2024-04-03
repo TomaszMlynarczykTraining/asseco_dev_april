@@ -5,73 +5,73 @@
   </bpmn:collaboration>
   <bpmn:process id="PR_002_PRZETW_OFERTY" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_02n2pf0">
-      <bpmn:lane id="Lane_1whhc6n" name="Kierownik handlowy">
-        <bpmn:flowNodeRef>Activity_1kh3biq</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>PR_002_GT_CZY_OFERTA_WYK</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_10vq2so" name="Klient\dział handlowy">
-        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>PR_002_UT_ZLOZENIE_ZAM</bpmn:flowNodeRef>
+      <bpmn:lane id="Lane_048pkf9" name="Pracownik">
+        <bpmn:flowNodeRef>Activity_1qqbrn1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_16zcl97</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_17lr976" name="System">
         <bpmn:flowNodeRef>Activity_0hsik8j</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1980vaw</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1x7niqk</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_048pkf9" name="Pracownik">
-        <bpmn:flowNodeRef>Activity_1qqbrn1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_16zcl97</bpmn:flowNodeRef>
+      <bpmn:lane id="Lane_10vq2so" name="Klient\dział handlowy">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>PR_002_UT_ZLOZENIE_ZAM</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1whhc6n" name="Kierownik handlowy">
+        <bpmn:flowNodeRef>Activity_1kh3biq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>PR_002_GT_CZY_OFERTA_WYK</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:userTask id="Activity_1kh3biq" name="Sprawdzenie wykonywalności" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
-      <bpmn:extensionElements />
-      <bpmn:incoming>Flow_10x26fx</bpmn:incoming>
-      <bpmn:outgoing>Flow_0egkmfb</bpmn:outgoing>
+    <bpmn:sequenceFlow id="Flow_0iild0f" sourceRef="Activity_1980vaw" targetRef="Event_1x7niqk" />
+    <bpmn:sequenceFlow id="Flow_0hj4ukd" sourceRef="Activity_1qqbrn1" targetRef="Event_16zcl97" />
+    <bpmn:sequenceFlow id="Flow_17xa5au" sourceRef="Activity_0hsik8j" targetRef="Activity_1qqbrn1" />
+    <bpmn:sequenceFlow id="Flow_09034lx" sourceRef="StartEvent_1" targetRef="PR_002_UT_ZLOZENIE_ZAM" />
+    <bpmn:sequenceFlow id="Flow_0u1496u" name="Tak" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_0hsik8j">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isOfferApplicable}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1g2w3iq" name="Nie" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_1980vaw" />
+    <bpmn:sequenceFlow id="Flow_0egkmfb" sourceRef="Activity_1kh3biq" targetRef="PR_002_GT_CZY_OFERTA_WYK" />
+    <bpmn:sequenceFlow id="Flow_10x26fx" sourceRef="PR_002_UT_ZLOZENIE_ZAM" targetRef="Activity_1kh3biq" />
+    <bpmn:userTask id="PR_002_UT_ZLOZENIE_ZAM" name="Złożenie zamówienia">
+      <bpmn:incoming>Flow_09034lx</bpmn:incoming>
+      <bpmn:outgoing>Flow_10x26fx</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:endEvent id="Event_1x7niqk" name="Oferta odrzucona">
+      <bpmn:incoming>Flow_0iild0f</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1980vaw" name="Wysłanie informacji o odrzuceniu oferty" camunda:delegateExpression="${mockDelegate}">
+      <bpmn:incoming>Flow_1g2w3iq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iild0f</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0hsik8j" name="Pobranie danych o zasobach" camunda:delegateExpression="${getResourcesDelegate}">
+      <bpmn:incoming>Flow_0u1496u</bpmn:incoming>
+      <bpmn:outgoing>Flow_17xa5au</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_16zcl97" name="Oferta przygotowana">
+      <bpmn:incoming>Flow_0hj4ukd</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_1qqbrn1" name="Przygotowanie oferty">
+      <bpmn:incoming>Flow_17xa5au</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hj4ukd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_1" name="Start procesu" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
+      <bpmn:outgoing>Flow_09034lx</bpmn:outgoing>
+    </bpmn:startEvent>
     <bpmn:exclusiveGateway id="PR_002_GT_CZY_OFERTA_WYK" name="Czy oferta jest wykonwalna?" default="Flow_1g2w3iq">
       <bpmn:incoming>Flow_0egkmfb</bpmn:incoming>
       <bpmn:outgoing>Flow_1g2w3iq</bpmn:outgoing>
       <bpmn:outgoing>Flow_0u1496u</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="StartEvent_1" name="Start procesu" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
-      <bpmn:outgoing>Flow_09034lx</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1qqbrn1" name="Przygotowanie oferty">
-      <bpmn:incoming>Flow_17xa5au</bpmn:incoming>
-      <bpmn:outgoing>Flow_0hj4ukd</bpmn:outgoing>
+    <bpmn:userTask id="Activity_1kh3biq" name="Sprawdzenie wykonywalności" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_10x26fx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0egkmfb</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="Event_16zcl97" name="Oferta przygotowana">
-      <bpmn:incoming>Flow_0hj4ukd</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0hsik8j" name="Pobranie danych o zasobach" camunda:delegateExpression="${mockDelegate}">
-      <bpmn:incoming>Flow_0u1496u</bpmn:incoming>
-      <bpmn:outgoing>Flow_17xa5au</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1980vaw" name="Wysłanie informacji o odrzuceniu oferty" camunda:delegateExpression="${mockDelegate}">
-      <bpmn:incoming>Flow_1g2w3iq</bpmn:incoming>
-      <bpmn:outgoing>Flow_0iild0f</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:endEvent id="Event_1x7niqk" name="Oferta odrzucona">
-      <bpmn:incoming>Flow_0iild0f</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_10x26fx" sourceRef="PR_002_UT_ZLOZENIE_ZAM" targetRef="Activity_1kh3biq" />
-    <bpmn:sequenceFlow id="Flow_0egkmfb" sourceRef="Activity_1kh3biq" targetRef="PR_002_GT_CZY_OFERTA_WYK" />
-    <bpmn:sequenceFlow id="Flow_1g2w3iq" name="Nie" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_1980vaw" />
-    <bpmn:sequenceFlow id="Flow_0u1496u" name="Tak" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_0hsik8j">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isOfferApplicable}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_09034lx" sourceRef="StartEvent_1" targetRef="PR_002_UT_ZLOZENIE_ZAM" />
-    <bpmn:sequenceFlow id="Flow_17xa5au" sourceRef="Activity_0hsik8j" targetRef="Activity_1qqbrn1" />
-    <bpmn:sequenceFlow id="Flow_0hj4ukd" sourceRef="Activity_1qqbrn1" targetRef="Event_16zcl97" />
-    <bpmn:sequenceFlow id="Flow_0iild0f" sourceRef="Activity_1980vaw" targetRef="Event_1x7niqk" />
-    <bpmn:userTask id="PR_002_UT_ZLOZENIE_ZAM" name="Złożenie zamówienia">
-      <bpmn:incoming>Flow_09034lx</bpmn:incoming>
-      <bpmn:outgoing>Flow_10x26fx</bpmn:outgoing>
-    </bpmn:userTask>
+    <bpmn:association id="Association_1l01ujf" associationDirection="None" sourceRef="Activity_1kh3biq" targetRef="TextAnnotation_0v6z0eq" />
     <bpmn:textAnnotation id="TextAnnotation_0v6z0eq">
       <bpmn:text>Skąd wziąć dane do sprawdzenia?</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_1l01ujf" associationDirection="None" sourceRef="Activity_1kh3biq" targetRef="TextAnnotation_0v6z0eq" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0cw4tlf">
