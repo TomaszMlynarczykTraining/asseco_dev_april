@@ -14,7 +14,7 @@ public class UtworzenieDokumentuDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
-        delegateExecution.setVariable(L_ZAKS_DOSTAW,1 );
+        delegateExecution.setVariable(L_ZAKS_DOSTAW,1L );
 
     }
 }
