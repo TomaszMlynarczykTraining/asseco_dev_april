@@ -10,11 +10,11 @@
         <bpmn:flowNodeRef>Activity_1ka7thp</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1smei6u" name="system">
-        <bpmn:flowNodeRef>Activity_0dao1x8</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1lf6q1t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_12l9j78</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1ufwqaa</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0tn6pb5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0dao1x8</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1h3bg8k" name="konserwator">
         <bpmn:flowNodeRef>Activity_08q56n1</bpmn:flowNodeRef>
@@ -33,11 +33,13 @@
       <bpmn:incoming>Flow_1qvufro</bpmn:incoming>
       <bpmn:outgoing>Flow_17j5s80</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0dao1x8" name="zamknięcie zlecenia" camunda:delegateExpression="${mockDelegate}">
-      <bpmn:incoming>Flow_0uavvhn</bpmn:incoming>
-      <bpmn:outgoing>Flow_0trgw32</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1lf6q1t" name="wypełnienie zlecenia konserwacji" camunda:delegateExpression="${mockDelegate}">
+    <bpmn:serviceTask id="Activity_1lf6q1t" name="wypełnienie zlecenia konserwacji" camunda:delegateExpression="${ptDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_pt1">TEST1</camunda:inputParameter>
+          <camunda:outputParameter name="Output_pt1">${zmienna_pt1}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0oexoid</bpmn:incoming>
       <bpmn:outgoing>Flow_0uavvhn</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -76,6 +78,10 @@
     <bpmn:sequenceFlow id="Flow_16au82t" sourceRef="StartEvent_1" targetRef="Activity_1ka7thp" />
     <bpmn:sequenceFlow id="Flow_139jjv5" sourceRef="Activity_1ka7thp" targetRef="Activity_1ufwqaa" />
     <bpmn:sequenceFlow id="Flow_0ge7422" sourceRef="Activity_1ufwqaa" targetRef="Activity_0tn6pb5" />
+    <bpmn:userTask id="Activity_0dao1x8" name="zamknięcie zlecenia">
+      <bpmn:incoming>Flow_0uavvhn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0trgw32</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0hy7ux6">
@@ -104,9 +110,6 @@
       <bpmndi:BPMNShape id="Activity_1ii4ye5_di" bpmnElement="Activity_1pn14lu">
         <dc:Bounds x="580" y="410" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1k664et_di" bpmnElement="Activity_0dao1x8">
-        <dc:Bounds x="900" y="260" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0963tyf_di" bpmnElement="Activity_1lf6q1t">
         <dc:Bounds x="770" y="260" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -130,6 +133,9 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="721" y="482" width="59" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09j4tid_di" bpmnElement="Activity_0dao1x8">
+        <dc:Bounds x="900" y="260" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1gg6oid_di" bpmnElement="Flow_1gg6oid">
         <di:waypoint x="450" y="340" />
