@@ -13,7 +13,6 @@ public class PaymentGatewayDelegate implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        Random random = new Random();
-        delegateExecution.setVariable(PAYMENT_CARD_KEY, random.nextBoolean());
+        delegateExecution.setVariable(PAYMENT_CARD_KEY, true);
     }
 }

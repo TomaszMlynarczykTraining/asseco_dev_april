@@ -60,10 +60,6 @@
       <bpmn:incoming>Flow_07047j3</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_07047j3" sourceRef="Activity_026h9x9" targetRef="Event_0eyhz0h" />
-    <bpmn:userTask id="Activity_04oastw" name="Płatnosc kartą">
-      <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
-      <bpmn:outgoing>Flow_0rsryum</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:userTask id="Activity_034v494" name="Przelew">
       <bpmn:incoming>Flow_0jrjrtn</bpmn:incoming>
       <bpmn:outgoing>Flow_1ddv1a1</bpmn:outgoing>
@@ -77,6 +73,10 @@
       <bpmn:incoming>Flow_0xll0et</bpmn:incoming>
       <bpmn:outgoing>Flow_07047j3</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:callActivity id="Activity_04oastw" name="Płatnosc kartą" calledElement="payment_process">
+      <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rsryum</bpmn:outgoing>
+    </bpmn:callActivity>
     <bpmn:serviceTask id="Activity_0rau05l" name="Wybierz rodzaj płatności" camunda:delegateExpression="${paymentGatewayDelegate}">
       <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
       <bpmn:outgoing>Flow_1ar7jiy</bpmn:outgoing>
@@ -134,9 +134,6 @@
           <dc:Bounds x="1102" y="746" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0686icf_di" bpmnElement="Activity_04oastw">
-        <dc:Bounds x="520" y="390" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0z1jeff_di" bpmnElement="Activity_034v494">
         <dc:Bounds x="520" y="530" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -146,7 +143,10 @@
       <bpmndi:BPMNShape id="Activity_0cf1rhi_di" bpmnElement="Activity_026h9x9">
         <dc:Bounds x="980" y="670" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0rjgtho_di" bpmnElement="Activity_0rau05l">
+      <bpmndi:BPMNShape id="Activity_0qfhda9_di" bpmnElement="Activity_04oastw">
+        <dc:Bounds x="520" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1680k3l_di" bpmnElement="Activity_0rau05l">
         <dc:Bounds x="260" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0jrjrtn_di" bpmnElement="Flow_0jrjrtn">
