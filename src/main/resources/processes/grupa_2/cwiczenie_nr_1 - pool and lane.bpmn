@@ -26,7 +26,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0dcxpfw</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_0tysmzj" name="Wybór sposobu płatności">
+    <bpmn:userTask id="Activity_0tysmzj" name="Wybór sposobu płatności" camunda:formRef="Form_Karta_Czy_Przelew" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_0dcxpfw</bpmn:incoming>
       <bpmn:outgoing>Flow_0fetawn</bpmn:outgoing>
     </bpmn:userTask>
@@ -41,7 +41,7 @@
     <bpmn:sequenceFlow id="Flow_0dcxpfw" sourceRef="StartEvent_1" targetRef="Activity_0tysmzj" />
     <bpmn:sequenceFlow id="Flow_0fetawn" sourceRef="Activity_0tysmzj" targetRef="Gateway_092phyu" />
     <bpmn:sequenceFlow id="Flow_karta" name="Karta" sourceRef="Gateway_092phyu" targetRef="Activity_platnosc_karta">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${wybranySposobPlatnosci=="KARTA"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_przelew" name="Przelew" sourceRef="Gateway_092phyu" targetRef="Activity_platnosc_przelewem" />
     <bpmn:sequenceFlow id="Flow_0guolkx" sourceRef="Activity_platnosc_karta" targetRef="Gateway_1no2je1" />
