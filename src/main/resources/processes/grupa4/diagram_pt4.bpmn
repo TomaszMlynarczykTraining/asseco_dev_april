@@ -29,7 +29,7 @@
       <bpmn:incoming>Flow_0cgmy81</bpmn:incoming>
       <bpmn:outgoing>Flow_1qvufro</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_1pn14lu" name="ocena jakości">
+    <bpmn:userTask id="Activity_1pn14lu" name="ocena jakości" camunda:formRef="form_pt4" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_1qvufro</bpmn:incoming>
       <bpmn:outgoing>Flow_17j5s80</bpmn:outgoing>
     </bpmn:userTask>
@@ -59,20 +59,20 @@
       <bpmn:incoming>Flow_0ge7422</bpmn:incoming>
       <bpmn:outgoing>Flow_1gg6oid</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:exclusiveGateway id="Gateway_0qfbdjp" name="jaka ocena?" default="Flow_0oexoid">
+    <bpmn:exclusiveGateway id="Gateway_0qfbdjp" name="jaka ocena?" default="Flow_0cgmy81">
       <bpmn:incoming>Flow_17j5s80</bpmn:incoming>
       <bpmn:outgoing>Flow_0cgmy81</bpmn:outgoing>
       <bpmn:outgoing>Flow_0oexoid</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1gg6oid" sourceRef="Activity_0tn6pb5" targetRef="Activity_08q56n1" />
-    <bpmn:sequenceFlow id="Flow_0cgmy81" name="negatywna" sourceRef="Gateway_0qfbdjp" targetRef="Activity_08q56n1">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0cgmy81" name="negatywna" sourceRef="Gateway_0qfbdjp" targetRef="Activity_08q56n1" />
     <bpmn:sequenceFlow id="Flow_1qvufro" sourceRef="Activity_08q56n1" targetRef="Activity_1pn14lu" />
     <bpmn:sequenceFlow id="Flow_17j5s80" sourceRef="Activity_1pn14lu" targetRef="Gateway_0qfbdjp" />
     <bpmn:sequenceFlow id="Flow_0uavvhn" sourceRef="Activity_1lf6q1t" targetRef="Activity_0dao1x8" />
     <bpmn:sequenceFlow id="Flow_0trgw32" sourceRef="Activity_0dao1x8" targetRef="Event_12l9j78" />
-    <bpmn:sequenceFlow id="Flow_0oexoid" name="pozytywna" sourceRef="Gateway_0qfbdjp" targetRef="Activity_1lf6q1t" />
+    <bpmn:sequenceFlow id="Flow_0oexoid" name="pozytywna" sourceRef="Gateway_0qfbdjp" targetRef="Activity_1lf6q1t">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${jestKonserwacjaPoprawna}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_16au82t" sourceRef="StartEvent_1" targetRef="Activity_1ka7thp" />
     <bpmn:sequenceFlow id="Flow_139jjv5" sourceRef="Activity_1ka7thp" targetRef="Activity_1ufwqaa" />
     <bpmn:sequenceFlow id="Flow_0ge7422" sourceRef="Activity_1ufwqaa" targetRef="Activity_0tn6pb5" />
