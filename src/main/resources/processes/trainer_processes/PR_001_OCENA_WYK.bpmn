@@ -45,6 +45,7 @@
       <bpmn:outgoing>Flow_0iild0f</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_0hsik8j" name="Pobranie danych o zasobach" camunda:delegateExpression="${getResourcesDelegate}">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_0u1496u</bpmn:incoming>
       <bpmn:outgoing>Flow_17xa5au</bpmn:outgoing>
     </bpmn:serviceTask>
