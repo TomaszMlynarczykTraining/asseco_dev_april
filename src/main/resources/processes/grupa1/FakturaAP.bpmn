@@ -8,8 +8,8 @@
       <bpmn:lane id="Lane_1dl58nr" name="Dział AP">
         <bpmn:flowNodeRef>Event_0k9wjvw</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0t1m326</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_11ikb6d</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0t1m326</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_00b7cz5" name="Processor AP">
         <bpmn:flowNodeRef>Activity_1pbe3qj</bpmn:flowNodeRef>
@@ -25,10 +25,6 @@
     <bpmn:endEvent id="Event_0k9wjvw" name="Koniec procesu">
       <bpmn:incoming>Flow_1fe8yok</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_0t1m326" name="Zaksięgowanie faktury do systemu">
-      <bpmn:incoming>Flow_0swvkew</bpmn:incoming>
-      <bpmn:outgoing>Flow_1fe8yok</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_1pbe3qj" name="Sprawdzenie zamówienia" camunda:delegateExpression="${utworzenieDokumentuDelegate}">
       <bpmn:incoming>Flow_0ocac9r</bpmn:incoming>
       <bpmn:outgoing>Flow_0swvkew</bpmn:outgoing>
@@ -37,6 +33,10 @@
       <bpmn:incoming>Flow_1xnc9o2</bpmn:incoming>
       <bpmn:outgoing>Flow_0ocac9r</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:callActivity id="Activity_0t1m326" name="Zaksięgowanie faktury do systemu" calledElement="PR_GR1_ZAKS_FAK">
+      <bpmn:incoming>Flow_0swvkew</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fe8yok</bpmn:outgoing>
+    </bpmn:callActivity>
     <bpmn:textAnnotation id="TextAnnotation_1wnjjmm">
       <bpmn:text>W ramach tego kroku odbywa się pobranie liczby zaksięgowanych dostaw</bpmn:text>
     </bpmn:textAnnotation>
@@ -67,9 +67,6 @@
           <dc:Bounds x="1082" y="315" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1rnzcwx_di" bpmnElement="Activity_0t1m326">
-        <dc:Bounds x="790" y="250" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ca322t_di" bpmnElement="Activity_1pbe3qj">
         <dc:Bounds x="520" y="630" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -79,6 +76,9 @@
       <bpmndi:BPMNShape id="TextAnnotation_1wnjjmm_di" bpmnElement="TextAnnotation_1wnjjmm">
         <dc:Bounds x="620" y="740" width="99.99510188087774" height="98.74608150470219" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jqpb1v_di" bpmnElement="Activity_0t1m326">
+        <dc:Bounds x="790" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1xnc9o2_di" bpmnElement="Flow_1xnc9o2">
         <di:waypoint x="258" y="290" />
