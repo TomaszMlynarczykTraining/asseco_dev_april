@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Konserwacja wykonana poprawnie?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1ujvww8",
+        "columns": null
+      },
+      "id": "Field_1e7hitc",
+      "key": "jestKonserwacjaPoprawna"
+    }
+  ],
+  "type": "default",
+  "id": "form_pt4",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
