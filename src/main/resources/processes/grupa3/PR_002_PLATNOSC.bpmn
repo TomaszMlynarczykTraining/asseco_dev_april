@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_1ftdfgy">
     <bpmn:participant id="Participant_0djyo7h" name="System płatności" processRef="Proces_platnosci_grupa3" />
   </bpmn:collaboration>
-  <bpmn:process id="Proces_platnosci_grupa3" isExecutable="true">
+  <bpmn:process id="Proces_platnosci_grupa3" isExecutable="true" camunda:historyTimeToLive="20">
     <bpmn:laneSet id="LaneSet_1hjmqx9">
       <bpmn:lane id="Lane_14vsqza" name="System mailingowy">
         <bpmn:flowNodeRef>Event_0eyhz0h</bpmn:flowNodeRef>
@@ -25,10 +25,10 @@
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="Flow_0jrjrtn" name="Nie" sourceRef="Gateway_0gynz9u" targetRef="Activity_034v494">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not karta}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not isCardPayment}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0f8ryjr" name="Tak" sourceRef="Gateway_0gynz9u" targetRef="Activity_04oastw">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${karta}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isCardPayment}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ar7jiy" sourceRef="Activity_0rau05l" targetRef="Gateway_0gynz9u" />
     <bpmn:sequenceFlow id="Flow_1wk4xrw" sourceRef="Event_1o8i2le" targetRef="Activity_0rau05l" />
@@ -51,7 +51,7 @@
     <bpmn:startEvent id="Event_1o8i2le" name="Start płatnosci">
       <bpmn:outgoing>Flow_1wk4xrw</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="Gateway_0z5k2ps" name="Czy zaapceptowano regulamin">
+    <bpmn:exclusiveGateway id="Gateway_0z5k2ps" name="Czy zaapceptowano regulamin" default="Flow_1acxgt7">
       <bpmn:incoming>Flow_1d5ynvc</bpmn:incoming>
       <bpmn:outgoing>Flow_0xll0et</bpmn:outgoing>
       <bpmn:outgoing>Flow_1acxgt7</bpmn:outgoing>
@@ -73,7 +73,7 @@
       <bpmn:incoming>Flow_0rsryum</bpmn:incoming>
       <bpmn:outgoing>Flow_1d5ynvc</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0rau05l" name="Wybierz rodzaj płatności">
+    <bpmn:userTask id="Activity_0rau05l" name="Wybierz rodzaj płatności" camunda:formRef="isCardPaymentForm" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
       <bpmn:outgoing>Flow_1ar7jiy</bpmn:outgoing>
     </bpmn:userTask>

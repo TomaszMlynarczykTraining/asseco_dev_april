@@ -23,7 +23,8 @@
         <bpmn:flowNodeRef>Event_16zcl97</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:userTask id="Activity_1kh3biq" name="Sprawdzenie wykonywalności">
+    <bpmn:userTask id="Activity_1kh3biq" name="Sprawdzenie wykonywalności" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_10x26fx</bpmn:incoming>
       <bpmn:outgoing>Flow_0egkmfb</bpmn:outgoing>
     </bpmn:userTask>
@@ -32,7 +33,7 @@
       <bpmn:outgoing>Flow_1g2w3iq</bpmn:outgoing>
       <bpmn:outgoing>Flow_0u1496u</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="StartEvent_1" name="Start procesu">
+    <bpmn:startEvent id="StartEvent_1" name="Start procesu" camunda:formRef="PR_001_FR_001_CZY_JEST_WYK" camunda:formRefBinding="latest">
       <bpmn:outgoing>Flow_09034lx</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_1qqbrn1" name="Przygotowanie oferty">
@@ -57,7 +58,7 @@
     <bpmn:sequenceFlow id="Flow_0egkmfb" sourceRef="Activity_1kh3biq" targetRef="PR_002_GT_CZY_OFERTA_WYK" />
     <bpmn:sequenceFlow id="Flow_1g2w3iq" name="Nie" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_1980vaw" />
     <bpmn:sequenceFlow id="Flow_0u1496u" name="Tak" sourceRef="PR_002_GT_CZY_OFERTA_WYK" targetRef="Activity_0hsik8j">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isOfferApplicable}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_09034lx" sourceRef="StartEvent_1" targetRef="PR_002_UT_ZLOZENIE_ZAM" />
     <bpmn:sequenceFlow id="Flow_17xa5au" sourceRef="Activity_0hsik8j" targetRef="Activity_1qqbrn1" />

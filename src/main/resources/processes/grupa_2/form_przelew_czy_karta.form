@@ -1,0 +1,33 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Przelew",
+          "value": "PRZELEW"
+        },
+        {
+          "label": "Karta",
+          "value": "KARTA"
+        }
+      ],
+      "label": "Wybierz sposób płatności",
+      "type": "select",
+      "layout": {
+        "row": "Row_04ojn72",
+        "columns": null
+      },
+      "id": "Field_0zzsqi5",
+      "key": "wybranySposobPlatnosci"
+    }
+  ],
+  "type": "default",
+  "id": "Form_Karta_Czy_Przelew",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
