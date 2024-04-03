@@ -26,7 +26,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1yym04z</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1sgki8l" name="wybierz metodę płatności">
+    <bpmn:userTask id="Activity_1sgki8l" name="wybierz metodę płatności" camunda:formRef="PT1_FORM_TYP_PLATNOSCI" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_1yym04z</bpmn:incoming>
       <bpmn:outgoing>Flow_1cz2qkh</bpmn:outgoing>
     </bpmn:userTask>
@@ -43,21 +43,21 @@
     <bpmn:sequenceFlow id="Flow_1yym04z" sourceRef="StartEvent_1" targetRef="Activity_1sgki8l" />
     <bpmn:sequenceFlow id="Flow_1cz2qkh" sourceRef="Activity_1sgki8l" targetRef="Gateway_0psei8m" />
     <bpmn:sequenceFlow id="Flow_1bpxjru" name="karta" sourceRef="Gateway_0psei8m" targetRef="Activity_1tsnb4g">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${RADIO_PLAT=='KARTA'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1xwj4ui" name="przelew" sourceRef="Gateway_0psei8m" targetRef="Activity_0y6jw1j">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${RADIO_PLAT=='PRZELEW'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00iczr6" sourceRef="Activity_1tsnb4g" targetRef="Gateway_08pjm3c" />
     <bpmn:sequenceFlow id="Flow_1ivel1l" sourceRef="Activity_0y6jw1j" targetRef="Gateway_08pjm3c" />
     <bpmn:sequenceFlow id="Flow_0z8lzoc" sourceRef="Gateway_08pjm3c" targetRef="Activity_00ftgep" />
     <bpmn:sequenceFlow id="Flow_16ph4i7" sourceRef="Activity_00ftgep" targetRef="Activity_01k69n0" />
     <bpmn:sequenceFlow id="Flow_0viut2q" sourceRef="Activity_01k69n0" targetRef="Event_08qnowh" />
-    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą" camunda:delegateExpression="${true}">
+    <bpmn:serviceTask id="Activity_1tsnb4g" name="obsłuż płatność kartą" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_1bpxjru</bpmn:incoming>
       <bpmn:outgoing>Flow_00iczr6</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0y6jw1j" name="obsłuż płatność przelewem" camunda:delegateExpression="${true}">
+    <bpmn:serviceTask id="Activity_0y6jw1j" name="obsłuż płatność przelewem" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_1xwj4ui</bpmn:incoming>
       <bpmn:outgoing>Flow_1ivel1l</bpmn:outgoing>
     </bpmn:serviceTask>
