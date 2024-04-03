@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hfiecc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:collaboration id="Collaboration_1mq3of6">
+    <bpmn:participant id="Participant_07kjvqr" processRef="PR_003_FakturaAP" />
+  </bpmn:collaboration>
+  <bpmn:process id="PR_003_FakturaAP" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:laneSet id="LaneSet_00uvo65">
+      <bpmn:lane id="Lane_1dl58nr" name="Dział AP">
+        <bpmn:flowNodeRef>Event_0k9wjvw</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0t1m326</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_11ikb6d</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_00b7cz5" name="Processor AP">
+        <bpmn:flowNodeRef>Activity_1pbe3qj</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="Flow_1xnc9o2" sourceRef="StartEvent_1" targetRef="Activity_11ikb6d" />
+    <bpmn:sequenceFlow id="Flow_0ocac9r" sourceRef="Activity_11ikb6d" targetRef="Activity_1pbe3qj" />
+    <bpmn:startEvent id="StartEvent_1" name="Start procesu">
+      <bpmn:outgoing>Flow_1xnc9o2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0swvkew" sourceRef="Activity_1pbe3qj" targetRef="Activity_0t1m326" />
+    <bpmn:sequenceFlow id="Flow_1fe8yok" sourceRef="Activity_0t1m326" targetRef="Event_0k9wjvw" />
+    <bpmn:endEvent id="Event_0k9wjvw" name="Koniec procesu">
+      <bpmn:incoming>Flow_1fe8yok</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_0t1m326" name="Zaksięgowanie faktury do systemu">
+      <bpmn:incoming>Flow_0swvkew</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fe8yok</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1pbe3qj" name="Sprawdzenie zamówienia" camunda:delegateExpression="${mockDelegate}">
+      <bpmn:incoming>Flow_0ocac9r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0swvkew</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_11ikb6d" name="Utworzenie dokumentu rozliczeniowego">
+      <bpmn:incoming>Flow_1xnc9o2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ocac9r</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_1wnjjmm">
+      <bpmn:text>W ramach tego kroku odbywa się pobranie liczby zaksięgowanych dostaw</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dc7qyk" associationDirection="None" sourceRef="Activity_1pbe3qj" targetRef="TextAnnotation_1wnjjmm" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1mq3of6">
+      <bpmndi:BPMNShape id="Participant_07kjvqr_di" bpmnElement="Participant_07kjvqr" isHorizontal="true">
+        <dc:Bounds x="129" y="120" width="1261" height="830" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1dl58nr_di" bpmnElement="Lane_1dl58nr" isHorizontal="true">
+        <dc:Bounds x="159" y="120" width="1231" height="450" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_00b7cz5_di" bpmnElement="Lane_00b7cz5" isHorizontal="true">
+        <dc:Bounds x="159" y="570" width="1231" height="380" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1wnjjmm_di" bpmnElement="TextAnnotation_1wnjjmm">
+        <dc:Bounds x="620" y="740" width="99.99510188087774" height="98.74608150470219" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="222" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="208" y="315" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0k9wjvw_di" bpmnElement="Event_0k9wjvw">
+        <dc:Bounds x="1102" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1082" y="315" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rnzcwx_di" bpmnElement="Activity_0t1m326">
+        <dc:Bounds x="790" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ca322t_di" bpmnElement="Activity_1pbe3qj">
+        <dc:Bounds x="520" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06pxrij_di" bpmnElement="Activity_11ikb6d">
+        <dc:Bounds x="360" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dc7qyk_di" bpmnElement="Association_0dc7qyk">
+        <di:waypoint x="615" y="708" />
+        <di:waypoint x="652" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xnc9o2_di" bpmnElement="Flow_1xnc9o2">
+        <di:waypoint x="258" y="290" />
+        <di:waypoint x="360" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ocac9r_di" bpmnElement="Flow_0ocac9r">
+        <di:waypoint x="410" y="330" />
+        <di:waypoint x="410" y="670" />
+        <di:waypoint x="520" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0swvkew_di" bpmnElement="Flow_0swvkew">
+        <di:waypoint x="620" y="670" />
+        <di:waypoint x="730" y="670" />
+        <di:waypoint x="730" y="290" />
+        <di:waypoint x="790" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fe8yok_di" bpmnElement="Flow_1fe8yok">
+        <di:waypoint x="890" y="290" />
+        <di:waypoint x="1102" y="290" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

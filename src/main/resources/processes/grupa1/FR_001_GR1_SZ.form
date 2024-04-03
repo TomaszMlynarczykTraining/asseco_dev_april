@@ -1,0 +1,53 @@
+{
+  "components": [
+    {
+      "text": "# Wybierz sposób zapłaty",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0w25tlc",
+        "columns": null
+      },
+      "id": "Field_12r65lx"
+    },
+    {
+      "values": [
+        {
+          "label": "Karta",
+          "value": "Karta"
+        },
+        {
+          "label": "Przelew Bankowy",
+          "value": "Przelew"
+        }
+      ],
+      "label": "",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0al8v16",
+        "columns": null
+      },
+      "id": "Field_0nc57xn",
+      "key": "sposobZaplaty"
+    },
+    {
+      "action": "submit",
+      "label": "Potwierdź",
+      "type": "button",
+      "layout": {
+        "row": "Row_0w8bfjb",
+        "columns": null
+      },
+      "id": "Field_07ghwng"
+    }
+  ],
+  "type": "default",
+  "id": "FR_001_GR1_SZ",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
