@@ -30,7 +30,7 @@
       <bpmn:outgoing>Flow_0t1mbpr</bpmn:outgoing>
       <bpmn:outgoing>Flow_1sdqaiu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_0ttrak4" name="Wybierz sposób zapłaty">
+    <bpmn:userTask id="Activity_0ttrak4" name="Wybierz sposób zapłaty" camunda:formRef="FR_001_GR1_SZ" camunda:formRefBinding="latest">
       <bpmn:incoming>Flow_012q3j0</bpmn:incoming>
       <bpmn:outgoing>Flow_0cr3adr</bpmn:outgoing>
     </bpmn:userTask>
@@ -61,10 +61,10 @@
     <bpmn:sequenceFlow id="Flow_012q3j0" sourceRef="StartEvent_1" targetRef="Activity_0ttrak4" />
     <bpmn:sequenceFlow id="Flow_0cr3adr" sourceRef="Activity_0ttrak4" targetRef="Gateway_0fofovt" />
     <bpmn:sequenceFlow id="Flow_0t1mbpr" name="Zapłata kartą" sourceRef="Gateway_0fofovt" targetRef="Activity_1gyml9y">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${sposobZaplaty == "Karta"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1sdqaiu" name="Zapłata przelewem" sourceRef="Gateway_0fofovt" targetRef="Activity_120syna">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${sposobZaplaty == "Przelew"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_00993uv" sourceRef="Activity_1gyml9y" targetRef="Gateway_1t86uw2" />
     <bpmn:sequenceFlow id="Flow_0l35an2" sourceRef="Activity_120syna" targetRef="Gateway_1t86uw2" />
