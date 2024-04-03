@@ -1,0 +1,34 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Karta płatnicza",
+          "value": "KARTA"
+        },
+        {
+          "label": "Przelew bankowy",
+          "value": "PRZELEW"
+        }
+      ],
+      "label": "Wybierz sposób płatności",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0d0po3w",
+        "columns": null
+      },
+      "id": "Field_1pi9k3o",
+      "key": "RADIO_PLAT",
+      "defaultValue": "KARTA"
+    }
+  ],
+  "type": "default",
+  "id": "PT1_FORM_TYP_PLATNOSCI",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
