@@ -33,7 +33,6 @@ public class GetResourcesDelegate implements JavaDelegate {
 
         //Wykonanie logiki biznesowej
 
-
         //Ustawienie potrzebnych zmiennych procesowych
 
         delegateExecution.setVariable("someVariable", "text");

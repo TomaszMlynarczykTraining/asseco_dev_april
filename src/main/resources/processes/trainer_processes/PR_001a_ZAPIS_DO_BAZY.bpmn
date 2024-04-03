@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0xineml" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="PR_001a_ZAPIS_DO_BAZY" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1yrl5rz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:dataStoreReference id="DataStoreReference_037uvuu" name="Baza danych ZUS" />
+    <bpmn:userTask id="PR_001_ST_ZAPIS_WNIOSKU" name="Zapis wniosku do bazy">
+      <bpmn:incoming>Flow_1yrl5rz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ycqub6</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0nbpimr">
+        <bpmn:targetRef>DataStoreReference_037uvuu</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1yrl5rz" sourceRef="StartEvent_1" targetRef="PR_001_ST_ZAPIS_WNIOSKU" />
+    <bpmn:endEvent id="Event_1lnk0ec">
+      <bpmn:incoming>Flow_1ycqub6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ycqub6" sourceRef="PR_001_ST_ZAPIS_WNIOSKU" targetRef="Event_1lnk0ec" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PR_001a_ZAPIS_DO_BAZY">
+      <bpmndi:BPMNShape id="DataStoreReference_037uvuu_di" bpmnElement="DataStoreReference_037uvuu">
+        <dc:Bounds x="345" y="195" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="325" y="252" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s97a73_di" bpmnElement="PR_001_ST_ZAPIS_WNIOSKU">
+        <dc:Bounds x="320" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lnk0ec_di" bpmnElement="Event_1lnk0ec">
+        <dc:Bounds x="512" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0nbpimr_di" bpmnElement="DataOutputAssociation_0nbpimr">
+        <di:waypoint x="370" y="160" />
+        <di:waypoint x="370" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yrl5rz_di" bpmnElement="Flow_1yrl5rz">
+        <di:waypoint x="228" y="120" />
+        <di:waypoint x="320" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ycqub6_di" bpmnElement="Flow_1ycqub6">
+        <di:waypoint x="420" y="120" />
+        <di:waypoint x="512" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

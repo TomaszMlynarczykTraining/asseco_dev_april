@@ -54,15 +54,6 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1w5rsa5" sourceRef="Activity_1u5oic6" targetRef="Activity_1i6xphg" />
     <bpmn:sequenceFlow id="Flow_0ayh7hq" sourceRef="Activity_1i6xphg" targetRef="Gateway_1fnhg7n" />
-    <bpmn:userTask id="Activity_1u5oic6" name="Ocena wniosku o rejestrację nadgodzin">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="czyJestAkceptacja" label="Czy akceptacja nadgodzin?" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1ssse5m</bpmn:incoming>
-      <bpmn:outgoing>Flow_1w5rsa5</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="Activity_Zapisanie_Wniosku" name="Zapisanie wniosku w bazie" camunda:delegateExpression="${mockDelegate}">
       <bpmn:incoming>Flow_1tvolv1</bpmn:incoming>
       <bpmn:outgoing>Flow_1ssse5m</bpmn:outgoing>
@@ -75,6 +66,13 @@
       <bpmn:incoming>Flow_1s6u52d</bpmn:incoming>
       <bpmn:outgoing>Flow_1tvolv1</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:callActivity id="Activity_1u5oic6" name="Ocena wniosku o rejestrację nadgodzin" calledElement="Process_Nadgodziny_Ocena_Wniosku">
+      <bpmn:extensionElements>
+        <camunda:out source="czyJestAkceptacja" target="czyJestAkceptacja" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ssse5m</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w5rsa5</bpmn:outgoing>
+    </bpmn:callActivity>
   </bpmn:process>
   <bpmn:message id="Message_1s7sisq" name="Message_Akceptacja" />
   <bpmn:message id="Message_0etedap" name="Message_Odrzucenie" />
@@ -115,9 +113,6 @@
         <dc:Bounds x="990" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1fdbjqv_di" bpmnElement="Activity_1u5oic6">
-        <dc:Bounds x="580" y="290" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ew5bco_di" bpmnElement="Activity_Zapisanie_Wniosku">
         <dc:Bounds x="430" y="430" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -128,6 +123,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_11x0qmf_di" bpmnElement="Activity_Pobranie_nadgodzin_pracownika">
         <dc:Bounds x="310" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vdc2nv_di" bpmnElement="Activity_1u5oic6">
+        <dc:Bounds x="580" y="290" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1s6u52d_di" bpmnElement="Flow_1s6u52d">
         <di:waypoint x="288" y="170" />
@@ -165,8 +163,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1w5rsa5_di" bpmnElement="Flow_1w5rsa5">
         <di:waypoint x="680" y="330" />
-        <di:waypoint x="690" y="330" />
-        <di:waypoint x="690" y="470" />
+        <di:waypoint x="700" y="330" />
+        <di:waypoint x="700" y="470" />
         <di:waypoint x="730" y="470" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ayh7hq_di" bpmnElement="Flow_0ayh7hq">
