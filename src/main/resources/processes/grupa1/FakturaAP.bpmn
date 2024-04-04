@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hfiecc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hfiecc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:collaboration id="Collaboration_1mq3of6">
     <bpmn:participant id="Participant_07kjvqr" processRef="PR_003_FakturaAP" />
   </bpmn:collaboration>
@@ -12,6 +12,8 @@
         <bpmn:flowNodeRef>Activity_1p7e0pu</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0k9wjvw</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1do00ul</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0ig8rnt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0pe4lr8</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_00b7cz5" name="Processor AP">
         <bpmn:flowNodeRef>Activity_1pbe3qj</bpmn:flowNodeRef>
@@ -55,6 +57,17 @@
 
 execution.setVariable("testStringa", a+"test");</bpmn:script>
     </bpmn:scriptTask>
+    <bpmn:boundaryEvent id="Event_0ig8rnt" attachedToRef="Activity_11ikb6d">
+      <bpmn:outgoing>Flow_06qp6mg</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1nw0wnc">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_06qp6mg" sourceRef="Event_0ig8rnt" targetRef="Event_0pe4lr8" />
+    <bpmn:endEvent id="Event_0pe4lr8">
+      <bpmn:incoming>Flow_06qp6mg</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_0zyvjcl" />
+    </bpmn:endEvent>
     <bpmn:textAnnotation id="TextAnnotation_1wnjjmm">
       <bpmn:text>W ramach tego kroku odbywa się pobranie liczby zaksięgowanych dostaw</bpmn:text>
     </bpmn:textAnnotation>
@@ -88,10 +101,6 @@ execution.setVariable("testStringa", a+"test");</bpmn:script>
       <bpmndi:BPMNShape id="Activity_0jqpb1v_di" bpmnElement="ZaksFak">
         <dc:Bounds x="790" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1wnjjmm_di" bpmnElement="TextAnnotation_1wnjjmm">
-        <dc:Bounds x="620" y="740" width="99.99510188087774" height="98.74608150470219" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0fwylbh_di" bpmnElement="Activity_1p7e0pu">
         <dc:Bounds x="1130" y="250" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -105,6 +114,16 @@ execution.setVariable("testStringa", a+"test");</bpmn:script>
       <bpmndi:BPMNShape id="Activity_1ktj7yu_di" bpmnElement="Activity_1do00ul">
         <dc:Bounds x="960" y="250" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1wnjjmm_di" bpmnElement="TextAnnotation_1wnjjmm">
+        <dc:Bounds x="620" y="740" width="99.99510188087774" height="98.74608150470219" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f3txw5_di" bpmnElement="Event_0pe4lr8">
+        <dc:Bounds x="642" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f8t7w6_di" bpmnElement="Event_0ig8rnt">
+        <dc:Bounds x="442" y="232" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1xnc9o2_di" bpmnElement="Flow_1xnc9o2">
         <di:waypoint x="258" y="290" />
@@ -125,10 +144,6 @@ execution.setVariable("testStringa", a+"test");</bpmn:script>
         <di:waypoint x="890" y="290" />
         <di:waypoint x="960" y="290" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0dc7qyk_di" bpmnElement="Association_0dc7qyk">
-        <di:waypoint x="615" y="708" />
-        <di:waypoint x="652" y="740" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tnpgd8_di" bpmnElement="Flow_1tnpgd8">
         <di:waypoint x="1230" y="290" />
         <di:waypoint x="1282" y="290" />
@@ -136,6 +151,15 @@ execution.setVariable("testStringa", a+"test");</bpmn:script>
       <bpmndi:BPMNEdge id="Flow_172x38t_di" bpmnElement="Flow_172x38t">
         <di:waypoint x="1060" y="290" />
         <di:waypoint x="1130" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0dc7qyk_di" bpmnElement="Association_0dc7qyk">
+        <di:waypoint x="615" y="708" />
+        <di:waypoint x="652" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06qp6mg_di" bpmnElement="Flow_06qp6mg">
+        <di:waypoint x="460" y="232" />
+        <di:waypoint x="460" y="170" />
+        <di:waypoint x="642" y="170" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
