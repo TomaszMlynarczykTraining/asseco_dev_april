@@ -12,7 +12,10 @@
     <bpmn:sequenceFlow id="Flow_01brqjg" sourceRef="Activity_15pc9px" targetRef="Event_16r7zej" />
     <bpmn:businessRuleTask id="Activity_0olkrud" camunda:resultVariable="salary" camunda:decisionRef="diagram_2_decision" camunda:mapDecisionResult="singleEntry">
       <bpmn:extensionElements>
-        <camunda:executionListener class="" event="end" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="positionName">Developer</camunda:inputParameter>
+          <camunda:inputParameter name="yearsWorked">${1}</camunda:inputParameter>
+        </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0m0u7i5</bpmn:incoming>
       <bpmn:outgoing>Flow_1fux8ps</bpmn:outgoing>
@@ -40,13 +43,13 @@
         <di:waypoint x="215" y="117" />
         <di:waypoint x="270" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_01brqjg_di" bpmnElement="Flow_01brqjg">
-        <di:waypoint x="540" y="117" />
-        <di:waypoint x="612" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fux8ps_di" bpmnElement="Flow_1fux8ps">
         <di:waypoint x="370" y="117" />
         <di:waypoint x="440" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01brqjg_di" bpmnElement="Flow_01brqjg">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="612" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
