@@ -18,15 +18,12 @@
       <bpmn:lane id="Lane_0oa3tiy" name="Użytkownik">
         <bpmn:flowNodeRef>Gateway_0z5k2ps</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_1o8i2le</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_0gynz9u</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0z3qa0m</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0gd81zz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0rau05l</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0gynz9u</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_0jrjrtn" name="Nie" sourceRef="Gateway_0gynz9u" targetRef="Activity_034v494">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not isCardPayment}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0f8ryjr" name="Tak" sourceRef="Gateway_0gynz9u" targetRef="Activity_04oastw">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isCardPayment}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -43,11 +40,6 @@
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_1acxgt7</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="Gateway_0gynz9u" name="Czy płatność kartą">
-      <bpmn:incoming>Flow_1ar7jiy</bpmn:incoming>
-      <bpmn:outgoing>Flow_0f8ryjr</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0jrjrtn</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:startEvent id="Event_1o8i2le" name="Start płatnosci">
       <bpmn:outgoing>Flow_1wk4xrw</bpmn:outgoing>
     </bpmn:startEvent>
@@ -73,7 +65,7 @@
       <bpmn:incoming>Flow_0xll0et</bpmn:incoming>
       <bpmn:outgoing>Flow_07047j3</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:callActivity id="Activity_04oastw" name="Płatnosc kartą" calledElement="payment_process">
+    <bpmn:callActivity id="Activity_04oastw" name="Płatnosc kartą" calledElement="payment_process" camunda:variableMappingDelegateExpression="${paymentMapperDelegate}">
       <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
       <bpmn:outgoing>Flow_0rsryum</bpmn:outgoing>
     </bpmn:callActivity>
@@ -81,6 +73,14 @@
       <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
       <bpmn:outgoing>Flow_1ar7jiy</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0jrjrtn" name="Nie" sourceRef="Gateway_0gynz9u" targetRef="Activity_034v494">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not isCardPayment}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0gynz9u" name="Czy płatność kartą">
+      <bpmn:incoming>Flow_1ar7jiy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0f8ryjr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0jrjrtn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ftdfgy">
@@ -158,11 +158,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0f8ryjr_di" bpmnElement="Flow_0f8ryjr">
-        <di:waypoint x="430" y="185" />
-        <di:waypoint x="430" y="430" />
-        <di:waypoint x="520" y="430" />
+        <di:waypoint x="455" y="160" />
+        <di:waypoint x="570" y="160" />
+        <di:waypoint x="570" y="390" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="467" y="412" width="17" height="14" />
+          <dc:Bounds x="505" y="142" width="17" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ar7jiy_di" bpmnElement="Flow_1ar7jiy">
