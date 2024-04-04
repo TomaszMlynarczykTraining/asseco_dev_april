@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hd55g3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="PR_GR4_SKRYPT" name="PR_GR4_SKRYPT" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ptdwjt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0ptdwjt" sourceRef="StartEvent_1" targetRef="Activity_0b4hl7s" />
+    <bpmn:endEvent id="Event_0nq3bvv">
+      <bpmn:incoming>Flow_0fe1189</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="Activity_0b4hl7s" name="SKRYPT1" scriptFormat="groovy" camunda:resultVariable="REZ_VAR">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="RADIO_PLAT">WART_INIT</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ptdwjt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qxwka6</bpmn:outgoing>
+      <bpmn:script>execution.setVariable('NEW_VAR' , execution.getVariable('RADIO_PLAT') + '  DOPISEK')</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0qxwka6" sourceRef="Activity_0b4hl7s" targetRef="Activity_1hiz9fg" />
+    <bpmn:sequenceFlow id="Flow_0fe1189" sourceRef="Activity_1hiz9fg" targetRef="Event_0nq3bvv" />
+    <bpmn:userTask id="Activity_1hiz9fg">
+      <bpmn:incoming>Flow_0qxwka6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fe1189</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PR_GR4_SKRYPT">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_15bgdqu" bpmnElement="Activity_0b4hl7s">
+        <dc:Bounds x="340" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0nq3bvv_di" bpmnElement="Event_0nq3bvv">
+        <dc:Bounds x="762" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mo55tg_di" bpmnElement="Activity_1hiz9fg">
+        <dc:Bounds x="540" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0ptdwjt_di" bpmnElement="Flow_0ptdwjt">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="293" y="117" />
+        <di:waypoint x="293" y="104" />
+        <di:waypoint x="340" y="104" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qxwka6_di" bpmnElement="Flow_0qxwka6">
+        <di:waypoint x="440" y="117" />
+        <di:waypoint x="540" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fe1189_di" bpmnElement="Flow_0fe1189">
+        <di:waypoint x="640" y="117" />
+        <di:waypoint x="762" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
