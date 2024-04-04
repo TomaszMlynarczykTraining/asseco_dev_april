@@ -13,6 +13,8 @@
         <bpmn:flowNodeRef>Activity_0rau05l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0gynz9u</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1vtfq1c</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_01zb33n</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_08hqrli</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_14fguar" name="System platnosci kartą">
         <bpmn:flowNodeRef>Activity_04oastw</bpmn:flowNodeRef>
@@ -106,6 +108,16 @@ execution.setVariable("nowa", x + " nowy tekst");
       <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
       <bpmn:outgoing>Flow_0b5m6b1</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_01zb33n" attachedToRef="Activity_0gd81zz">
+      <bpmn:outgoing>Flow_1eip44e</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_10l0nw0">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1eip44e" sourceRef="Event_01zb33n" targetRef="Event_08hqrli" />
+    <bpmn:endEvent id="Event_08hqrli">
+      <bpmn:incoming>Flow_1eip44e</bpmn:incoming>
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ftdfgy">
@@ -180,6 +192,12 @@ execution.setVariable("nowa", x + " nowy tekst");
       <bpmndi:BPMNShape id="Activity_1ivbkzh_di" bpmnElement="Activity_1vtfq1c">
         <dc:Bounds x="580" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08hqrli_di" bpmnElement="Event_08hqrli">
+        <dc:Bounds x="832" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0hfnhbj_di" bpmnElement="Event_01zb33n">
+        <dc:Bounds x="832" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1acxgt7_di" bpmnElement="Flow_1acxgt7">
         <di:waypoint x="975" y="190" />
         <di:waypoint x="1162" y="190" />
@@ -197,10 +215,10 @@ execution.setVariable("nowa", x + " nowy tekst");
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xll0et_di" bpmnElement="Flow_0xll0et">
         <di:waypoint x="950" y="215" />
-        <di:waypoint x="950" y="250" />
-        <di:waypoint x="530" y="846" />
+        <di:waypoint x="950" y="580" />
+        <di:waypoint x="530" y="853" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="593" y="657" width="17" height="14" />
+          <dc:Bounds x="606" y="736" width="17" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0jrjrtn_di" bpmnElement="Flow_0jrjrtn">
@@ -250,6 +268,10 @@ execution.setVariable("nowa", x + " nowy tekst");
       <bpmndi:BPMNEdge id="Flow_0b5m6b1_di" bpmnElement="Flow_0b5m6b1">
         <di:waypoint x="630" y="310" />
         <di:waypoint x="630" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1eip44e_di" bpmnElement="Flow_1eip44e">
+        <di:waypoint x="850" y="248" />
+        <di:waypoint x="850" y="312" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
