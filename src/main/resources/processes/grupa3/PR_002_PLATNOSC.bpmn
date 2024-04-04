@@ -43,7 +43,7 @@
     </bpmn:userTask>
     <bpmn:userTask id="Activity_0gd81zz" name="Akcpetacja regulaminu">
       <bpmn:extensionElements>
-        <camunda:taskListener delegateExpression="${userTaskListener}" event="create" />
+        <camunda:taskListener delegateExpression="${userTaskListenerGrupa3}" event="create" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ddv1a1</bpmn:incoming>
       <bpmn:incoming>Flow_0rsryum</bpmn:incoming>

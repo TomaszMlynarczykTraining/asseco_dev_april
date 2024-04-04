@@ -6,11 +6,12 @@
   <bpmn:process id="PR_003_FakturaAP" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_00uvo65">
       <bpmn:lane id="Lane_1dl58nr" name="Dział AP">
-        <bpmn:flowNodeRef>Event_0k9wjvw</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_11ikb6d</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ZaksFak</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1p7e0pu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0k9wjvw</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1do00ul</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_00b7cz5" name="Processor AP">
         <bpmn:flowNodeRef>Activity_1pbe3qj</bpmn:flowNodeRef>
@@ -22,10 +23,7 @@
       <bpmn:outgoing>Flow_1xnc9o2</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0swvkew" sourceRef="Activity_1pbe3qj" targetRef="ZaksFak" />
-    <bpmn:sequenceFlow id="Flow_1fe8yok" sourceRef="ZaksFak" targetRef="Activity_1p7e0pu" />
-    <bpmn:endEvent id="Event_0k9wjvw" name="Koniec procesu">
-      <bpmn:incoming>Flow_1tnpgd8</bpmn:incoming>
-    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1fe8yok" sourceRef="ZaksFak" targetRef="Activity_1do00ul" />
     <bpmn:serviceTask id="Activity_1pbe3qj" name="Sprawdzenie zamówienia" camunda:delegateExpression="${utworzenieDokumentuDelegate}">
       <bpmn:incoming>Flow_0ocac9r</bpmn:incoming>
       <bpmn:outgoing>Flow_0swvkew</bpmn:outgoing>
@@ -41,11 +39,22 @@
       <bpmn:incoming>Flow_0swvkew</bpmn:incoming>
       <bpmn:outgoing>Flow_1fe8yok</bpmn:outgoing>
     </bpmn:callActivity>
-    <bpmn:sequenceFlow id="Flow_1tnpgd8" sourceRef="Activity_1p7e0pu" targetRef="Event_0k9wjvw" />
     <bpmn:userTask id="Activity_1p7e0pu" name="Sprawdzanie zmiennych">
-      <bpmn:incoming>Flow_1fe8yok</bpmn:incoming>
+      <bpmn:incoming>Flow_172x38t</bpmn:incoming>
       <bpmn:outgoing>Flow_1tnpgd8</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:endEvent id="Event_0k9wjvw" name="Koniec procesu">
+      <bpmn:incoming>Flow_1tnpgd8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1tnpgd8" sourceRef="Activity_1p7e0pu" targetRef="Event_0k9wjvw" />
+    <bpmn:sequenceFlow id="Flow_172x38t" sourceRef="Activity_1do00ul" targetRef="Activity_1p7e0pu" />
+    <bpmn:scriptTask id="Activity_1do00ul" name="Zmiana stringa aa" scriptFormat="Groovy">
+      <bpmn:incoming>Flow_1fe8yok</bpmn:incoming>
+      <bpmn:outgoing>Flow_172x38t</bpmn:outgoing>
+      <bpmn:script>String a = execution.getVariable("stringVar");
+
+execution.setVariable("testStringa", a+"test");</bpmn:script>
+    </bpmn:scriptTask>
     <bpmn:textAnnotation id="TextAnnotation_1wnjjmm">
       <bpmn:text>W ramach tego kroku odbywa się pobranie liczby zaksięgowanych dostaw</bpmn:text>
     </bpmn:textAnnotation>
@@ -70,27 +79,31 @@
           <dc:Bounds x="208" y="315" width="66" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0k9wjvw_di" bpmnElement="Event_0k9wjvw">
-        <dc:Bounds x="1102" y="272" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1082" y="315" width="76" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ca322t_di" bpmnElement="Activity_1pbe3qj">
         <dc:Bounds x="520" y="630" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_06pxrij_di" bpmnElement="Activity_11ikb6d">
         <dc:Bounds x="360" y="250" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jqpb1v_di" bpmnElement="ZaksFak">
+        <dc:Bounds x="790" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1wnjjmm_di" bpmnElement="TextAnnotation_1wnjjmm">
         <dc:Bounds x="620" y="740" width="99.99510188087774" height="98.74608150470219" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0jqpb1v_di" bpmnElement="ZaksFak">
-        <dc:Bounds x="790" y="250" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0fwylbh_di" bpmnElement="Activity_1p7e0pu">
-        <dc:Bounds x="950" y="250" width="100" height="80" />
+        <dc:Bounds x="1130" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0k9wjvw_di" bpmnElement="Event_0k9wjvw">
+        <dc:Bounds x="1282" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1262" y="315" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ktj7yu_di" bpmnElement="Activity_1do00ul">
+        <dc:Bounds x="960" y="250" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1xnc9o2_di" bpmnElement="Flow_1xnc9o2">
@@ -110,15 +123,19 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fe8yok_di" bpmnElement="Flow_1fe8yok">
         <di:waypoint x="890" y="290" />
-        <di:waypoint x="950" y="290" />
+        <di:waypoint x="960" y="290" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0dc7qyk_di" bpmnElement="Association_0dc7qyk">
         <di:waypoint x="615" y="708" />
         <di:waypoint x="652" y="740" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tnpgd8_di" bpmnElement="Flow_1tnpgd8">
-        <di:waypoint x="1050" y="290" />
-        <di:waypoint x="1102" y="290" />
+        <di:waypoint x="1230" y="290" />
+        <di:waypoint x="1282" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_172x38t_di" bpmnElement="Flow_172x38t">
+        <di:waypoint x="1060" y="290" />
+        <di:waypoint x="1130" y="290" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
