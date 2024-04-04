@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0el99q4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="GR2_DMN_SALARY" name="GR2_DMN_SALARY" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0s8w4do</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0s8w4do" sourceRef="StartEvent_1" targetRef="Activity_dmn_ustal_wynagrodzenie" />
+    <bpmn:sequenceFlow id="Flow_0apxuc1" sourceRef="Activity_dmn_ustal_wynagrodzenie" targetRef="Activity_czekaj_przed_zakonczeniem" />
+    <bpmn:endEvent id="Event_0c4twx5">
+      <bpmn:incoming>Flow_0n5ootx</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0n5ootx" sourceRef="Activity_czekaj_przed_zakonczeniem" targetRef="Event_0c4twx5" />
+    <bpmn:businessRuleTask id="Activity_dmn_ustal_wynagrodzenie" name="ustal wynagrodzenie" camunda:resultVariable="wynagrodzenie" camunda:decisionRef="decyzja_o_wynagrodzeniu" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_0s8w4do</bpmn:incoming>
+      <bpmn:outgoing>Flow_0apxuc1</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:userTask id="Activity_czekaj_przed_zakonczeniem" name="czekaj przed zakonczeniem">
+      <bpmn:incoming>Flow_0apxuc1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0n5ootx</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GR2_DMN_SALARY">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0c4twx5_di" bpmnElement="Event_0c4twx5">
+        <dc:Bounds x="532" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vu7u1r_di" bpmnElement="Activity_dmn_ustal_wynagrodzenie">
+        <dc:Bounds x="250" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ec2pnd_di" bpmnElement="Activity_czekaj_przed_zakonczeniem">
+        <dc:Bounds x="390" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0s8w4do_di" bpmnElement="Flow_0s8w4do">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="250" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0n5ootx_di" bpmnElement="Flow_0n5ootx">
+        <di:waypoint x="490" y="117" />
+        <di:waypoint x="532" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0apxuc1_di" bpmnElement="Flow_0apxuc1">
+        <di:waypoint x="350" y="117" />
+        <di:waypoint x="390" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
