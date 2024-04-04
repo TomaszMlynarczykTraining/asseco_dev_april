@@ -53,7 +53,9 @@
       <bpmn:outgoing>Flow_1tvolv1</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:callActivity id="Activity_1u5oic6" name="Ocena wniosku o rejestrację nadgodzin" calledElement="Process_Nadgodziny_Ocena_Wniosku" camunda:variableMappingDelegateExpression="${ocenWnioskuVariableMapper}">
-      <bpmn:extensionElements />
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ssse5m</bpmn:incoming>
       <bpmn:outgoing>Flow_1w5rsa5</bpmn:outgoing>
     </bpmn:callActivity>
