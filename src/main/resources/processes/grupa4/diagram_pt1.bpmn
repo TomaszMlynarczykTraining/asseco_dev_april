@@ -28,6 +28,9 @@
       <bpmn:outgoing>Flow_1yym04z</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Activity_1sgki8l" name="wybierz metodę płatności" camunda:formRef="PT1_FORM_TYP_PLATNOSCI" camunda:formRefBinding="latest">
+      <bpmn:extensionElements>
+        <camunda:taskListener delegateExpression="${grupa4TaskListener}" event="create" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1yym04z</bpmn:incoming>
       <bpmn:outgoing>Flow_1cz2qkh</bpmn:outgoing>
     </bpmn:userTask>
