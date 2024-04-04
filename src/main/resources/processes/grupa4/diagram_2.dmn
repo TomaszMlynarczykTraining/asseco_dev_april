@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="diagram_2_def" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="diagram_2_decision" name="Decision 1">
+    <decisionTable id="DecisionTable_1kjhwjn">
+      <input id="Input_1" label="positionName" camunda:inputVariable="positionName">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_12ubjst" label="yearsWorked" camunda:inputVariable="yearsWorked">
+        <inputExpression id="LiteralExpression_0wxbmh1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="salary" typeRef="integer" />
+      <rule id="DecisionRule_1xne153">
+        <inputEntry id="UnaryTests_1us69s2">
+          <text>"Developer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xdocpx">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gcb8ml">
+          <text>8000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wpg5tu">
+        <inputEntry id="UnaryTests_00bgaj0">
+          <text>"Consultant"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12k7ggq">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ysoxt5">
+          <text>5000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pvix6e">
+        <inputEntry id="UnaryTests_0tsq9vv">
+          <text>"Accountant"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q08wcg">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zd7361">
+          <text>2000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05z9ur8">
+        <inputEntry id="UnaryTests_18nxgi4">
+          <text>"Developer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a569yn">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jibocd">
+          <text>9000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0rdwy6k">
+        <inputEntry id="UnaryTests_04yb5xb">
+          <text>"Consultant"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1713z72">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1npkalg">
+          <text>6000</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01od7ow">
+        <inputEntry id="UnaryTests_0jn5jqq">
+          <text>"Accountant"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07k0o4x">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mvd5ld">
+          <text>3000</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="diagram_2_decision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
