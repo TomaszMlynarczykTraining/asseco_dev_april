@@ -9,6 +9,7 @@
         <camunda:formData>
           <camunda:formField id="czyJestAkceptacja" label="Czy akceptacja nadgodzin?" type="boolean" />
         </camunda:formData>
+        <camunda:taskListener delegateExpression="${dueDateCreateListener}" event="create" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ah9cml</bpmn:incoming>
       <bpmn:outgoing>Flow_1rpuabm</bpmn:outgoing>
