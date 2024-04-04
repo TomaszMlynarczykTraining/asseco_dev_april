@@ -12,6 +12,7 @@
         <bpmn:flowNodeRef>Activity_0gd81zz</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0rau05l</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0gynz9u</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1vtfq1c</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_14fguar" name="System platnosci kartą">
         <bpmn:flowNodeRef>Activity_04oastw</bpmn:flowNodeRef>
@@ -20,9 +21,10 @@
         <bpmn:flowNodeRef>Activity_034v494</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_14vsqza" name="System mailingowy">
-        <bpmn:flowNodeRef>Activity_026h9x9</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1ybj6dm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0w1f5fm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_026h9x9</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_01vjt3v</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:endEvent id="Event_0z3qa0m" name="Operacja przerwana">
@@ -50,8 +52,9 @@
       <bpmn:outgoing>Flow_1d5ynvc</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:callActivity id="Activity_04oastw" name="Płatnosc kartą" calledElement="payment_process" camunda:variableMappingDelegateExpression="${paymentMapperDelegate}">
-      <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
+      <bpmn:incoming>Flow_0b5m6b1</bpmn:incoming>
       <bpmn:outgoing>Flow_0rsryum</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="programisci" camunda:elementVariable="prgramista" />
     </bpmn:callActivity>
     <bpmn:serviceTask id="Activity_0rau05l" name="Wybierz rodzaj płatności" camunda:delegateExpression="${paymentGatewayDelegate}">
       <bpmn:incoming>Flow_1wk4xrw</bpmn:incoming>
@@ -62,15 +65,8 @@
       <bpmn:outgoing>Flow_0f8ryjr</bpmn:outgoing>
       <bpmn:outgoing>Flow_0jrjrtn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:scriptTask id="Activity_026h9x9" name="Wyślij podsumowanie" scriptFormat="groovy">
-      <bpmn:incoming>Flow_0xll0et</bpmn:incoming>
-      <bpmn:outgoing>Flow_144a7zh</bpmn:outgoing>
-      <bpmn:script>x = execution.getVariable("test");
-execution.setVariable("nowa", x + " nowy tekst");
-</bpmn:script>
-    </bpmn:scriptTask>
     <bpmn:userTask id="Activity_1ybj6dm" name="test script">
-      <bpmn:incoming>Flow_144a7zh</bpmn:incoming>
+      <bpmn:incoming>Flow_1io4kkp</bpmn:incoming>
       <bpmn:outgoing>Flow_0j1ay1h</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="Event_0w1f5fm">
@@ -87,12 +83,29 @@ execution.setVariable("nowa", x + " nowy tekst");
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ddv1a1" sourceRef="Activity_034v494" targetRef="Activity_0gd81zz" />
     <bpmn:sequenceFlow id="Flow_0rsryum" sourceRef="Activity_04oastw" targetRef="Activity_0gd81zz" />
-    <bpmn:sequenceFlow id="Flow_0f8ryjr" name="Tak" sourceRef="Gateway_0gynz9u" targetRef="Activity_04oastw">
+    <bpmn:sequenceFlow id="Flow_0f8ryjr" name="Tak" sourceRef="Gateway_0gynz9u" targetRef="Activity_1vtfq1c">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isCardPayment}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1ar7jiy" sourceRef="Activity_0rau05l" targetRef="Gateway_0gynz9u" />
-    <bpmn:sequenceFlow id="Flow_144a7zh" sourceRef="Activity_026h9x9" targetRef="Activity_1ybj6dm" />
+    <bpmn:sequenceFlow id="Flow_144a7zh" sourceRef="Activity_026h9x9" targetRef="Activity_01vjt3v" />
     <bpmn:sequenceFlow id="Flow_0j1ay1h" sourceRef="Activity_1ybj6dm" targetRef="Event_0w1f5fm" />
+    <bpmn:scriptTask id="Activity_026h9x9" name="Wyślij podsumowanie" scriptFormat="groovy">
+      <bpmn:incoming>Flow_0xll0et</bpmn:incoming>
+      <bpmn:outgoing>Flow_144a7zh</bpmn:outgoing>
+      <bpmn:script>x = execution.getVariable("test");
+execution.setVariable("nowa", x + " nowy tekst");
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1io4kkp" sourceRef="Activity_01vjt3v" targetRef="Activity_1ybj6dm" />
+    <bpmn:serviceTask id="Activity_01vjt3v" camunda:delegateExpression="${mockGrupa3Delegate}">
+      <bpmn:incoming>Flow_144a7zh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1io4kkp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0b5m6b1" sourceRef="Activity_1vtfq1c" targetRef="Activity_04oastw" />
+    <bpmn:serviceTask id="Activity_1vtfq1c" name="lista" camunda:delegateExpression="${mockGrupa3Delegate}">
+      <bpmn:incoming>Flow_0f8ryjr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0b5m6b1</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ftdfgy">
@@ -100,20 +113,20 @@ execution.setVariable("nowa", x + " nowy tekst");
         <dc:Bounds x="180" y="80" width="1050" height="880" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0oa3tiy_di" bpmnElement="Lane_0oa3tiy" isHorizontal="true">
-        <dc:Bounds x="210" y="80" width="1020" height="320" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_14fguar_di" bpmnElement="Lane_14fguar" isHorizontal="true">
-        <dc:Bounds x="210" y="400" width="1020" height="130" />
+      <bpmndi:BPMNShape id="Lane_14vsqza_di" bpmnElement="Lane_14vsqza" isHorizontal="true">
+        <dc:Bounds x="210" y="670" width="1020" height="290" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0pvrad4_di" bpmnElement="Lane_0pvrad4" isHorizontal="true">
         <dc:Bounds x="210" y="530" width="1020" height="140" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_14vsqza_di" bpmnElement="Lane_14vsqza" isHorizontal="true">
-        <dc:Bounds x="210" y="670" width="1020" height="290" />
+      <bpmndi:BPMNShape id="Lane_14fguar_di" bpmnElement="Lane_14fguar" isHorizontal="true">
+        <dc:Bounds x="210" y="400" width="1020" height="130" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0oa3tiy_di" bpmnElement="Lane_0oa3tiy" isHorizontal="true">
+        <dc:Bounds x="210" y="80" width="1020" height="320" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0z3qa0m_di" bpmnElement="Event_0z3qa0m">
@@ -152,14 +165,20 @@ execution.setVariable("nowa", x + " nowy tekst");
           <dc:Bounds x="460" y="135" width="64" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1w0063o_di" bpmnElement="Activity_026h9x9">
-        <dc:Bounds x="750" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_170f05y_di" bpmnElement="Activity_1ybj6dm">
         <dc:Bounds x="890" y="820" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0w1f5fm_di" bpmnElement="Event_0w1f5fm">
         <dc:Bounds x="1032" y="842" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1w0063o_di" bpmnElement="Activity_026h9x9">
+        <dc:Bounds x="430" y="820" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15tub0h_di" bpmnElement="Activity_01vjt3v">
+        <dc:Bounds x="660" y="820" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ivbkzh_di" bpmnElement="Activity_1vtfq1c">
+        <dc:Bounds x="580" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1acxgt7_di" bpmnElement="Flow_1acxgt7">
         <di:waypoint x="975" y="190" />
@@ -179,9 +198,9 @@ execution.setVariable("nowa", x + " nowy tekst");
       <bpmndi:BPMNEdge id="Flow_0xll0et_di" bpmnElement="Flow_0xll0et">
         <di:waypoint x="950" y="215" />
         <di:waypoint x="950" y="250" />
-        <di:waypoint x="848" y="714" />
+        <di:waypoint x="530" y="846" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="821" y="576" width="17" height="14" />
+          <dc:Bounds x="593" y="657" width="17" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0jrjrtn_di" bpmnElement="Flow_0jrjrtn">
@@ -207,7 +226,7 @@ execution.setVariable("nowa", x + " nowy tekst");
       <bpmndi:BPMNEdge id="Flow_0f8ryjr_di" bpmnElement="Flow_0f8ryjr">
         <di:waypoint x="515" y="190" />
         <di:waypoint x="630" y="190" />
-        <di:waypoint x="630" y="420" />
+        <di:waypoint x="630" y="230" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="565" y="172" width="17" height="14" />
         </bpmndi:BPMNLabel>
@@ -217,14 +236,20 @@ execution.setVariable("nowa", x + " nowy tekst");
         <di:waypoint x="465" y="190" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_144a7zh_di" bpmnElement="Flow_144a7zh">
-        <di:waypoint x="850" y="750" />
-        <di:waypoint x="870" y="750" />
-        <di:waypoint x="870" y="860" />
-        <di:waypoint x="890" y="860" />
+        <di:waypoint x="530" y="860" />
+        <di:waypoint x="660" y="860" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0j1ay1h_di" bpmnElement="Flow_0j1ay1h">
         <di:waypoint x="990" y="860" />
         <di:waypoint x="1032" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1io4kkp_di" bpmnElement="Flow_1io4kkp">
+        <di:waypoint x="760" y="860" />
+        <di:waypoint x="890" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b5m6b1_di" bpmnElement="Flow_0b5m6b1">
+        <di:waypoint x="630" y="310" />
+        <di:waypoint x="630" y="420" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0w0ud80" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="DMN_Ocena_wniosku" name="Decision 1">
+    <decisionTable id="DecisionTable_1on85wg">
+      <input id="Input_1" label="Liczba ndagodzin" camunda:inputVariable="liczbaNadgodzin">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text>liczbaNadgodzin</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0yvj7ow" label="Dzień miesiąca" camunda:inputVariable="dzienMiesiacaWniosku">
+        <inputExpression id="LiteralExpression_1cak9lq" typeRef="integer" expressionLanguage="feel">
+          <text>dzienMiesiacaWniosku</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Akceptacja" name="akceptacja" typeRef="boolean" />
+      <rule id="DecisionRule_1gbtyoj">
+        <inputEntry id="UnaryTests_0cqafd5">
+          <text>&gt;30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l593so">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rnpptq">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xf6hwv">
+        <inputEntry id="UnaryTests_081vvip">
+          <text>&lt;=30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1s09fvm">
+          <text>[29..31]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ninl1t">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_106ncov">
+        <inputEntry id="UnaryTests_0eghobr">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0x61evn">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0711j07">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="DMN_Ocena_wniosku">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
