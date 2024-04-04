@@ -20,15 +20,16 @@
       <bpmn:lane id="Lane_1787szn" name="Wnioskodawca">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0rm8bpx</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_18gp7w4</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:dataObjectReference id="DataObjectReference_1lx0xvu" name="Dane wejściowe: nazwa usera" dataObjectRef="DataObject_0swwfrd" />
     <bpmn:dataObject id="DataObject_0swwfrd" />
     <bpmn:sequenceFlow id="Flow_1mchano" name="Nie" sourceRef="PR_001_GT_CZY_ZAAKCEPTOWANY" targetRef="Activity_0u0fd8c" />
-    <bpmn:sequenceFlow id="Flow_19v0tcb" sourceRef="StartEvent_1" targetRef="Activity_0rm8bpx" />
+    <bpmn:sequenceFlow id="Flow_19v0tcb" sourceRef="StartEvent_1" targetRef="Activity_18gp7w4" />
     <bpmn:sequenceFlow id="Flow_18suv0g" sourceRef="Activity_0rm8bpx" targetRef="PR_001_GT_CZY_ZAAKCEPTOWANY" />
     <bpmn:subProcess id="Activity_0rm8bpx" name="Zadania użytkownika">
-      <bpmn:incoming>Flow_19v0tcb</bpmn:incoming>
+      <bpmn:incoming>Flow_14391iv</bpmn:incoming>
       <bpmn:outgoing>Flow_18suv0g</bpmn:outgoing>
       <bpmn:startEvent id="Event_17dzdr4">
         <bpmn:outgoing>Flow_0hps4v0</bpmn:outgoing>
@@ -102,9 +103,12 @@
       <bpmn:incoming>Flow_1mchano</bpmn:incoming>
       <bpmn:outgoing>Flow_1k334m8</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:callActivity id="Activity_1az2nxq" name="Zapis do bazy" calledElement="PR_001a_ZAPIS_DO_BAZY" camunda:variableMappingDelegateExpression="${applicationSendVariableMapper}">
+    <bpmn:callActivity id="Activity_1az2nxq" name="Zapis do bazy" calledElement="PR_001a_ZAPIS_DO_BAZY">
       <bpmn:extensionElements>
         <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="var1">${var1}</camunda:inputParameter>
+        </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_11xcor5</bpmn:incoming>
       <bpmn:outgoing>Flow_0u16uxx</bpmn:outgoing>
@@ -118,6 +122,13 @@
       <bpmn:incoming>Flow_0u16uxx</bpmn:incoming>
       <bpmn:outgoing>Flow_1d19pc9</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_14391iv" sourceRef="Activity_18gp7w4" targetRef="Activity_0rm8bpx" />
+    <bpmn:scriptTask id="Activity_18gp7w4" scriptFormat="groovy" camunda:resultVariable="anotherVar">
+      <bpmn:incoming>Flow_19v0tcb</bpmn:incoming>
+      <bpmn:outgoing>Flow_14391iv</bpmn:outgoing>
+      <bpmn:script>execution.setVariable("a","a")
+execution.setVariable("b",execution.getVariable("someVar") + "abc")</bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_07crs6g">
@@ -167,6 +178,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0mkdrll_di" bpmnElement="Activity_1cmgg3s">
         <dc:Bounds x="1220" y="560" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bhl2de_di" bpmnElement="Activity_18gp7w4">
+        <dc:Bounds x="420" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_09j6206_di" bpmnElement="Activity_0rm8bpx" isExpanded="false">
         <dc:Bounds x="630" y="200" width="100" height="80" />
@@ -224,7 +238,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19v0tcb_di" bpmnElement="Flow_19v0tcb">
         <di:waypoint x="358" y="240" />
-        <di:waypoint x="630" y="240" />
+        <di:waypoint x="420" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18suv0g_di" bpmnElement="Flow_18suv0g">
         <di:waypoint x="730" y="240" />
@@ -247,6 +261,10 @@
       <bpmndi:BPMNEdge id="Flow_1d19pc9_di" bpmnElement="Flow_1d19pc9">
         <di:waypoint x="1320" y="600" />
         <di:waypoint x="1342" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14391iv_di" bpmnElement="Flow_14391iv">
+        <di:waypoint x="520" y="240" />
+        <di:waypoint x="630" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_03vaj4i_di" bpmnElement="DataOutputAssociation_03vaj4i">
         <di:waypoint x="332" y="224" />
