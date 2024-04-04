@@ -26,6 +26,7 @@ public class GetResourcesDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
+
         //Pobranie danych z procesu
         String processDefinitionId = delegateExecution.getProcessDefinitionId();
         System.out.println(processDefinitionId);
