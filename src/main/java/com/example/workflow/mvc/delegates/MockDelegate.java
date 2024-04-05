@@ -4,6 +4,7 @@ package com.example.workflow.mvc.delegates;
 import com.example.workflow.mvc.entity.Client;
 import com.example.workflow.mvc.service.ClientService;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,13 @@ public class MockDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
+        //throw new BpmnError("Error_3ldolae", "Some meessage");
         // System.out.println(delegateExecution.getVariable("pizza"));
         // delegateExecution.getSuperExecution().getVariable("pizza");
         // delegateExecution.getVariableLocal("pizza");
 
 
-        int loopCounter = (int)delegateExecution.getVariable("loopCounter");
+        //int loopCounter = (int)delegateExecution.getVariable("loopCounter");
 
 
 
