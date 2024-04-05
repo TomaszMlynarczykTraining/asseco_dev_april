@@ -20,5 +20,5 @@ public class LoanService {
         return loanRepository.findAll();
     }
 
-    public List<Loan> getLoansByClientId(Long clientId) { return loanRepository.findLoansByClientId(clientId); }a
+    public List<Loan> getLoansByClientId(Long clientId) { return loanRepository.findLoansByClientId(clientId); }
 }
