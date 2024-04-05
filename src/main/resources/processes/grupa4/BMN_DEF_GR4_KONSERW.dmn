@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="BMN_DEF_GR4_KONSERW" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="BMN_GR4_KONSERW_DECISION" name="Decyzja konserwacji">
+    <decisionTable id="DecisionTable_1hnt79e" hitPolicy="FIRST">
+      <input id="Input_1" label="kraj" camunda:inputVariable="kraj">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ska6zh" label="koszt" camunda:inputVariable="koszt">
+        <inputExpression id="LiteralExpression_0qg3g9v" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="status" name="status" typeRef="string" />
+      <rule id="DecisionRule_0e7dn7j">
+        <inputEntry id="UnaryTests_19kljzp">
+          <text>not("PL")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jre33x">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ph9kc7">
+          <text>"anulowana"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yvbndr">
+        <inputEntry id="UnaryTests_0kn7ems">
+          <text>"PL"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vfhs12">
+          <text>&gt;3000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rs0j56">
+          <text>"dodatkowa akceptacja"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uvgb6c">
+        <inputEntry id="UnaryTests_0ro5ip1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08ga92z">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17xa4lz">
+          <text>"pozytywna"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="BMN_GR4_KONSERW_DECISION">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

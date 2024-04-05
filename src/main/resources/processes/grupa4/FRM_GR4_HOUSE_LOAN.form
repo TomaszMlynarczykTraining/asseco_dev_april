@@ -1,0 +1,53 @@
+{
+  "components": [
+    {
+      "text": "House Loan Data\n",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_100bnc2",
+        "columns": null
+      },
+      "id": "Field_1lejsjq"
+    },
+    {
+      "label": "User Identification No",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_00d96h2",
+        "columns": null
+      },
+      "id": "Field_1gmn88p",
+      "key": "textfield_smqisr"
+    },
+    {
+      "label": "Loan period in years",
+      "type": "number",
+      "layout": {
+        "row": "Row_1ja2wv9",
+        "columns": null
+      },
+      "id": "Field_0aemhi4",
+      "key": "number_klldq"
+    },
+    {
+      "label": "Loan amount",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1xutmfv",
+        "columns": null
+      },
+      "id": "Field_1r99dzo",
+      "key": "textarea_rkdroc"
+    }
+  ],
+  "type": "default",
+  "id": "FRM_GR4_HOUSE_LOAN",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
