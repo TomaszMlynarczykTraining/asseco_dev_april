@@ -28,10 +28,10 @@ public class MockDelegate implements JavaDelegate {
         // delegateExecution.getSuperExecution().getVariable("pizza");
         // delegateExecution.getVariableLocal("pizza");
 
-        List<Client> clients = clientService.getClients().stream()
-                .collect(Collectors.toList());
 
-        delegateExecution.setVariable("clientList", clients);
+        int loopCounter = (int)delegateExecution.getVariable("loopCounter");
+
+
 
         //System.out.println(runtimeService.getVariable(delegateExecution.getProcessInstanceId(), "pizza"));
 

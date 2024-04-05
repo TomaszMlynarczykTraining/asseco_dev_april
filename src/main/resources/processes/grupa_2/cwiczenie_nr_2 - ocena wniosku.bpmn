@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hgkohi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hgkohi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <bpmn:process id="Process_Nadgodziny_Ocena_Wniosku" name="Ocena wniosku o nadgodziny" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:startEvent id="StartEvent" name="Start">
       <bpmn:outgoing>Flow_0ah9cml</bpmn:outgoing>
@@ -11,36 +11,100 @@
         </camunda:formData>
         <camunda:taskListener delegateExpression="${dueDateCreateListener}" event="create" />
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0ah9cml</bpmn:incoming>
+      <bpmn:incoming>Flow_16nauj8</bpmn:incoming>
       <bpmn:outgoing>Flow_1rpuabm</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0ah9cml" sourceRef="StartEvent" targetRef="Activity_1u5oic6" />
+    <bpmn:sequenceFlow id="Flow_0ah9cml" sourceRef="StartEvent" targetRef="Activity_18j4jrg" />
     <bpmn:endEvent id="Event_04ob9vy">
       <bpmn:incoming>Flow_1rpuabm</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1rpuabm" sourceRef="Activity_1u5oic6" targetRef="Event_04ob9vy" />
+    <bpmn:sequenceFlow id="Flow_16nauj8" sourceRef="Activity_0mr4u2z" targetRef="Activity_1u5oic6" />
+    <bpmn:businessRuleTask id="Activity_0mr4u2z" name="Ocena wniosku" camunda:resultVariable="czyJestAkceptacja" camunda:decisionRef="DMN_Ocena_wniosku" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_0hdi9i7</bpmn:incoming>
+      <bpmn:outgoing>Flow_16nauj8</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="Activity_18j4jrg" name="Pobranie listy zmiennych" camunda:asyncBefore="true" camunda:delegateExpression="${listaZmiennychDelegate}">
+      <bpmn:incoming>Flow_0ah9cml</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kg4ii8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0hdi9i7" sourceRef="Activity_158ip75" targetRef="Activity_0mr4u2z" />
+    <bpmn:userTask id="Activity_158ip75" name="Lista zadań dla użytkowników">
+      <bpmn:incoming>Flow_1kg4ii8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hdi9i7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="Event_0uxl4qm" attachedToRef="Activity_158ip75">
+      <bpmn:outgoing>Flow_08eyg5y</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_17r6omi">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_08eyg5y" sourceRef="Event_0uxl4qm" targetRef="Event_01438aq" />
+    <bpmn:endEvent id="Event_01438aq" name="Przerwanie procesu">
+      <bpmn:incoming>Flow_08eyg5y</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1ajm67v" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1kg4ii8" sourceRef="Activity_18j4jrg" targetRef="Activity_158ip75" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Nadgodziny_Ocena_Wniosku">
+      <bpmndi:BPMNShape id="Activity_1a51hpa_di" bpmnElement="Activity_158ip75">
+        <dc:Bounds x="480" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <dc:Bounds x="152" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="185" y="142" width="25" height="14" />
+          <dc:Bounds x="158" y="142" width="25" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1fdbjqv_di" bpmnElement="Activity_1u5oic6">
-        <dc:Bounds x="280" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_1jboq0k_di" bpmnElement="Activity_18j4jrg">
+        <dc:Bounds x="240" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_04ob9vy_di" bpmnElement="Event_04ob9vy">
-        <dc:Bounds x="452" y="99" width="36" height="36" />
+        <dc:Bounds x="1042" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fdbjqv_di" bpmnElement="Activity_1u5oic6">
+        <dc:Bounds x="870" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1knujqa_di" bpmnElement="Activity_0mr4u2z">
+        <dc:Bounds x="720" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cgkdhv_di" bpmnElement="Event_01438aq">
+        <dc:Bounds x="652" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="643" y="265" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bm5k8x_di" bpmnElement="Event_0uxl4qm">
+        <dc:Bounds x="562" y="139" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0ah9cml_di" bpmnElement="Flow_0ah9cml">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="280" y="117" />
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="240" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rpuabm_di" bpmnElement="Flow_1rpuabm">
-        <di:waypoint x="380" y="117" />
-        <di:waypoint x="452" y="117" />
+        <di:waypoint x="970" y="117" />
+        <di:waypoint x="1006" y="117" />
+        <di:waypoint x="1006" y="130" />
+        <di:waypoint x="1042" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16nauj8_di" bpmnElement="Flow_16nauj8">
+        <di:waypoint x="820" y="117" />
+        <di:waypoint x="870" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hdi9i7_di" bpmnElement="Flow_0hdi9i7">
+        <di:waypoint x="580" y="117" />
+        <di:waypoint x="720" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08eyg5y_di" bpmnElement="Flow_08eyg5y">
+        <di:waypoint x="580" y="175" />
+        <di:waypoint x="580" y="240" />
+        <di:waypoint x="652" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kg4ii8_di" bpmnElement="Flow_1kg4ii8">
+        <di:waypoint x="340" y="117" />
+        <di:waypoint x="480" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

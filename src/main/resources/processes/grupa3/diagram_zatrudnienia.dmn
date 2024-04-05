@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0zp8eb0" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="DMN_Decyzja_o_odrzuceniu" name="Decision 1">
+    <decisionTable id="DecisionTable_06qwn2n" hitPolicy="FIRST">
+      <input id="Input_1" label="Płaca" camunda:inputVariable="salary">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0q4qnvs" label="Czy już był" camunda:inputVariable="again">
+        <inputExpression id="LiteralExpression_068ro7c" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Czy zatrudnic" name="isHired" typeRef="boolean" />
+      <rule id="DecisionRule_0f6hw81">
+        <inputEntry id="UnaryTests_1n9jmje">
+          <text>&gt;20000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ivpdum">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0medg1e">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14xb2r8">
+        <inputEntry id="UnaryTests_08fmzur">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nsbtxq">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_088qoru">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cer8g1">
+        <inputEntry id="UnaryTests_1t6fxj4">
+          <text>&lt;20000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18lhxk3">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0igx5wn">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="DMN_Decyzja_o_odrzuceniu">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0hxq1vz" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="DMN_001_DECYZJA_O_WNIOSKU" name="Decision 1">
+    <decisionTable id="DecisionTable_12ngppz" hitPolicy="FIRST">
+      <input id="Input_1" camunda:inputVariable="dochod">
+        <inputExpression id="InputExpression_1" typeRef="integer" expressionLanguage="feel">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1btb4fn" camunda:inputVariable="liczbaDzieci">
+        <inputExpression id="LiteralExpression_0x2awhf" typeRef="integer">
+          <text>liczbaDzieci</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="decyzja" typeRef="boolean" />
+      <rule id="DecisionRule_0aza302">
+        <description>Komentarz</description>
+        <inputEntry id="UnaryTests_0sjbikz">
+          <text>500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09ee533">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h8p2d3">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1og9fvc">
+        <inputEntry id="UnaryTests_0wtt5ss">
+          <text>&gt;500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tk2wqm">
+          <text>5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0iabetb">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0fn2v8l">
+        <inputEntry id="UnaryTests_0u1ir4p">
+          <text>&lt;500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16yfb8l">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mcemch">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="DMN_001_DECYZJA_O_WNIOSKU">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
