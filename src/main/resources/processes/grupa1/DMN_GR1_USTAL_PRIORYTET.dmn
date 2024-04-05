@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1loj075" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="Decision_ustal_priorytet" name="Decision 1">
+    <decisionTable id="DecisionTable_0hppjiq" hitPolicy="FIRST">
+      <input id="Input_1" label="KWOTA" camunda:inputVariable="kwota">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1iinvct" label="DATA" camunda:inputVariable="data">
+        <inputExpression id="LiteralExpression_0kyo23y" typeRef="date">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0e8mbcx" label="PRIORYTET" name="priorytet" typeRef="string" />
+      <rule id="DecisionRule_0cmqc6z">
+        <inputEntry id="UnaryTests_0bxk17l">
+          <text>&gt; 5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uiwnim">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_168eu0z">
+          <text>"wysoki"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0q20ena">
+        <inputEntry id="UnaryTests_0mac85w">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y2ajco">
+          <text>&lt;= now() + duration("P10D")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fhr6vb">
+          <text>"wysoki"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05mfkgx">
+        <inputEntry id="UnaryTests_1xo8pmj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tm718b">
+          <text>date and time(dnow(), "Europe/Berlin")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vv5dbq">
+          <text>"niski"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_ustal_priorytet">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

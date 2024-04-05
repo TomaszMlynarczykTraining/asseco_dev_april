@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ah7sg3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_1v1ve85" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:extensionElements />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0zyk7mg</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0re6jum" sourceRef="Activity_13wvyec" targetRef="Activity_0m0ppqu" />
+    <bpmn:endEvent id="Event_11th3k1">
+      <bpmn:incoming>Flow_0k3r324</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0k3r324" sourceRef="Activity_0m0ppqu" targetRef="Event_11th3k1" />
+    <bpmn:userTask id="Activity_0m0ppqu" name="iteruj listę">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="list2">
+            <camunda:list>
+              <camunda:value>1</camunda:value>
+              <camunda:value>2</camunda:value>
+            </camunda:list>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0re6jum</bpmn:incoming>
+      <bpmn:outgoing>Flow_0k3r324</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:asyncBefore="true" camunda:collection="list" camunda:elementVariable="item" />
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0zyk7mg" sourceRef="StartEvent_1" targetRef="Activity_13wvyec" />
+    <bpmn:scriptTask id="Activity_13wvyec" name="przygotuj listę" scriptFormat="groovy" camunda:resultVariable="list">
+      <bpmn:incoming>Flow_0zyk7mg</bpmn:incoming>
+      <bpmn:outgoing>Flow_0re6jum</bpmn:outgoing>
+      <bpmn:script>[1,2,3]</bpmn:script>
+    </bpmn:scriptTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1v1ve85">
+      <bpmndi:BPMNShape id="Activity_1l3ldwt_di" bpmnElement="Activity_0m0ppqu">
+        <dc:Bounds x="450" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hma9dn_di" bpmnElement="Activity_13wvyec">
+        <dc:Bounds x="250" y="70" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11th3k1_di" bpmnElement="Event_11th3k1">
+        <dc:Bounds x="622" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0re6jum_di" bpmnElement="Flow_0re6jum">
+        <di:waypoint x="350" y="110" />
+        <di:waypoint x="450" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k3r324_di" bpmnElement="Flow_0k3r324">
+        <di:waypoint x="550" y="110" />
+        <di:waypoint x="622" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zyk7mg_di" bpmnElement="Flow_0zyk7mg">
+        <di:waypoint x="188" y="110" />
+        <di:waypoint x="250" y="110" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

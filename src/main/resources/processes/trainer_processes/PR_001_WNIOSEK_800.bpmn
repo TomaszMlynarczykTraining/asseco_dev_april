@@ -3,7 +3,7 @@
   <bpmn:collaboration id="Collaboration_07crs6g">
     <bpmn:participant id="Participant_0g16awx" name="Procesowanie wniosku o 800+" processRef="PR_001_WNIOSEK_800" />
   </bpmn:collaboration>
-  <bpmn:process id="PR_001_WNIOSEK_800" isExecutable="true" camunda:historyTimeToLive="180">
+  <bpmn:process id="PR_001_WNIOSEK_800" isExecutable="true" camunda:versionTag="v1" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_13u1xsr">
       <bpmn:lane id="Lane_1yqeh8r" name="System">
         <bpmn:flowNodeRef>Activity_0r80pup</bpmn:flowNodeRef>
