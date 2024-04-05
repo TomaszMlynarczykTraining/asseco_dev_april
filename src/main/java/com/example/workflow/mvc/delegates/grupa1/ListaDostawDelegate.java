@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MockDelegate implements JavaDelegate {
+public class ListaDostawDelegate implements JavaDelegate {
 
     @Autowired
     RuntimeService runtimeService;
