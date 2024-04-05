@@ -19,7 +19,8 @@ public class MockGrupa3Delegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
-        List<String> imiona = List.of("Mateusz", "Szymon", "Mariusz", "Jarek");
+//        List<String> imiona = List.of("Mateusz", "Szymon", "Mariusz", "Jarek");
+        List<String> imiona = List.of("Jarek");
 
         delegateExecution.setVariable("programisci", imiona);
 
