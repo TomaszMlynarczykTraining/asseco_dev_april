@@ -36,8 +36,8 @@ public class GetDebtDataDelegate implements JavaDelegate {
             execution.setVariable("isDebt", false);
         } else {
             execution.setVariable("isDebt", true);
-            execution.setVariable("isOverdue", debt.getIsOverdue());
-            execution.setVariable("amount", debt.getAmount());
+//            execution.setVariable("isOverdue", debt.getIsOverdue());
+//            execution.setVariable("amount", debt.getAmount());
         }
     }
 

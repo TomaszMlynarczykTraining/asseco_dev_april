@@ -23,12 +23,14 @@ public class GetLoansDataDelegate implements JavaDelegate {
         }
         int clientId = Integer.parseInt(clientIdObject.toString());
 
-        Integer loansSum = loanRepository.findAll().stream()
-                .filter(loan -> loan.getClient_id() == clientId)
-                .map(loan -> Integer.parseInt(loan.getAmount()))
-                .reduce(0, Integer::sum);
+//        Integer loansSum = loanRepository.findAll().stream()
+//                .filter(loan -> loan.getClient_id() == clientId)
+//                .map(loan -> Integer.parseInt(loan.getAmount()))
+//                .reduce(0, Integer::sum);
 
-        execution.setVariable("loansSum", loansSum);
+        boolean isLoan = loanRepository.findAll().stream().anyMatch(loan -> loan.getClient_id() == clientId);
+
+        execution.setVariable("isLoan", isLoan);
     }
 
 }
