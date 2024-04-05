@@ -16,7 +16,9 @@ public class LoanDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
-        List<Long> loanIdList = loanService.getAllLoans()
+        Long clientId = (Long)delegateExecution.getVariable("clientId");
+
+        List<Long> loanIdList = loanService.getLoansByClientId(clientId)
                 .stream()
                 .map( s -> s.getId())
                 .collect(Collectors.toList());
