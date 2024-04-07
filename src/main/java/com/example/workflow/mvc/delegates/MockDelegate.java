@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +35,10 @@ public class MockDelegate implements JavaDelegate {
 
         //int loopCounter = (int)delegateExecution.getVariable("loopCounter");
 
+        Random random = new Random();
 
+
+        delegateExecution.setVariableLocal("var from st", random.nextInt());
 
         //System.out.println(runtimeService.getVariable(delegateExecution.getProcessInstanceId(), "pizza"));
 

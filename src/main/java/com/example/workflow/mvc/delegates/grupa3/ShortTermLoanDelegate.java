@@ -10,11 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ShortTermLoanDelegate implements JavaDelegate {
-    @Autowired
-    LoanRepository loanRepository;
 
-    @Autowired
-    UserRepository userRepository;
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         int clientId =(int) delegateExecution.getVariable("clientId");

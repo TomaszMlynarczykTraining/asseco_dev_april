@@ -17,12 +17,12 @@ public class LoanDelegate implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
         Long clientId = (Long)delegateExecution.getVariable("clientId");
-
+/*
         List<Long> loanIdList = loanService.getLoansByClientId(clientId)
                 .stream()
                 .map( s -> s.getId())
                 .collect(Collectors.toList());
-        delegateExecution.setVariable("idList", loanIdList);
+        delegateExecution.setVariable("idList", loanIdList);*/
 
     }
 }

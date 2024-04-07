@@ -13,6 +13,10 @@ server.port: 8081
 camunda:
   bpm:
     deployment-resource-pattern: classpath*:processes/grupa3/*.*
+    metrics:
+      enabled: false
+    historyCleanupmetricsEnabled: false
+
 
 camunda.bpm.admin-user:
   id: demo

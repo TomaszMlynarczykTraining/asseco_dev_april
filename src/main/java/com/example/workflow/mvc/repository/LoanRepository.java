@@ -12,6 +12,5 @@ import java.util.Optional;
 @Repository
 public interface LoanRepository extends JpaRepository<Loan, Long> {
 
-    List<Loan> findLoansByClientId(Long clientId);
 
 }
