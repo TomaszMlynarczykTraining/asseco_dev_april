@@ -19,14 +19,16 @@ public class Gr1ExternalTask implements ExternalTaskHandler {
         //externalTaskService.complete(externalTask, variables);
 
         //externalTaskService.handleBpmnError(externalTask, "aaa");
+        //throw new RuntimeException("qqq");
+        externalTaskService.handleFailure(externalTask, "failure msg", null, 0, 1000);
 
-        Integer i = externalTask.getRetries();
+        /*Integer i = externalTask.getRetries();
         if (i == null) i = 3;
         if (i > 0) {
             externalTaskService.handleFailure(externalTask, "failure msg", null, --i, 1000);
         } else {
             externalTaskService.complete(externalTask, variables);
-        }
+        }*/
 
         //throw new BpmnError("err from ext");
     }
