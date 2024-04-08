@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_18ndprd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_1l9uyhl" name="PR_GR4_ASYNC" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0y0dum0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0y0dum0" sourceRef="StartEvent_1" targetRef="Activity_07u4x4o" />
+    <bpmn:sequenceFlow id="Flow_1620nkr" sourceRef="Activity_07u4x4o" targetRef="GR4_SERVICE1" />
+    <bpmn:sequenceFlow id="Flow_1595mok" sourceRef="GR4_SERVICE1" targetRef="GR4_SERVICE2" />
+    <bpmn:endEvent id="Event_0i5thgn">
+      <bpmn:incoming>Flow_0acxmld</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0acxmld" sourceRef="GR4_SERVICE2" targetRef="Event_0i5thgn" />
+    <bpmn:userTask id="Activity_07u4x4o" name="user prepare task" camunda:asyncAfter="true">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_0y0dum0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1620nkr</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="GR4_SERVICE1" name="service1" camunda:asyncAfter="true" camunda:delegateExpression="${service1Delegate}">
+      <bpmn:incoming>Flow_1620nkr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1595mok</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="GR4_SERVICE2" name="GR4_SERVICE2" camunda:delegateExpression="">
+      <bpmn:incoming>Flow_1595mok</bpmn:incoming>
+      <bpmn:outgoing>Flow_0acxmld</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1l9uyhl">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0i5thgn_di" bpmnElement="Event_0i5thgn">
+        <dc:Bounds x="752" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qzv4up_di" bpmnElement="Activity_07u4x4o">
+        <dc:Bounds x="270" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m5vxrr_di" bpmnElement="GR4_SERVICE1">
+        <dc:Bounds x="430" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qczle3_di" bpmnElement="GR4_SERVICE2">
+        <dc:Bounds x="590" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0y0dum0_di" bpmnElement="Flow_0y0dum0">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="270" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1620nkr_di" bpmnElement="Flow_1620nkr">
+        <di:waypoint x="370" y="97" />
+        <di:waypoint x="430" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1595mok_di" bpmnElement="Flow_1595mok">
+        <di:waypoint x="530" y="97" />
+        <di:waypoint x="590" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0acxmld_di" bpmnElement="Flow_0acxmld">
+        <di:waypoint x="690" y="97" />
+        <di:waypoint x="752" y="97" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
