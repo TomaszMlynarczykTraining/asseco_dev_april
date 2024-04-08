@@ -34,11 +34,10 @@ public class MockDelegate implements JavaDelegate {
 
 
         //int loopCounter = (int)delegateExecution.getVariable("loopCounter");
+        throw new BpmnError("abc","asd");
 
-        Random random = new Random();
-
-
-        delegateExecution.setVariableLocal("var from st", random.nextInt());
+        //Random random = new Random();
+       //delegateExecution.setVariableLocal("var from st", random.nextInt());
 
         //System.out.println(runtimeService.getVariable(delegateExecution.getProcessInstanceId(), "pizza"));
 
