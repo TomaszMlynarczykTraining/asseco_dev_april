@@ -14,7 +14,13 @@
       <bpmn:incoming>Flow_1ty6f1d</bpmn:incoming>
       <bpmn:outgoing>Flow_1xbmrib</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_19bxqs5" name="external task gr4" camunda:type="external" camunda:topic="sendMessage">
+    <bpmn:serviceTask id="Activity_19bxqs5" name="external task gr4" camunda:type="external" camunda:topic="sendMessageGr4">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="currency">EUR</camunda:inputParameter>
+          <camunda:inputParameter name="amount">${20}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0r1p935</bpmn:incoming>
       <bpmn:outgoing>Flow_1ty6f1d</bpmn:outgoing>
     </bpmn:serviceTask>
