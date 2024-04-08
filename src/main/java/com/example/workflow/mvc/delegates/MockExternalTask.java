@@ -9,21 +9,24 @@ import org.camunda.bpm.engine.variable.Variables;
 import org.springframework.stereotype.Component;
 
 @Component
-@ExternalTaskSubscription("getFact") // create a subscription for this topic name
+@ExternalTaskSubscription("externalDelegate") // create a subscription for this topic name
 public class MockExternalTask implements ExternalTaskHandler {
 
 
     @Override
     public void execute(ExternalTask externalTask, ExternalTaskService externalTaskService) {
 
-
         System.out.println(externalTask.getBusinessKey());
 
         VariableMap variables = Variables.createVariables();
 
         variables.put("customerSurname", "Batman");
+        throw new RuntimeException();
 
-        externalTaskService.complete(externalTask);
+       // externalTaskService.handleFailure(externalTask, "a","b",0,2);
+
+        //externalTaskService.handleFailure();
+        //externalTaskService.complete(externalTask, variables);
 
     }
 }

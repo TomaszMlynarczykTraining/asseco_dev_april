@@ -12,7 +12,7 @@ server.port: 8081
 
 camunda:
   bpm:
-    deployment-resource-pattern: classpath*:processes/grupa3/*.*
+    deployment-resource-pattern: classpath*:processes/trainer_processes/*.*
     metrics:
       enabled: false
     historyCleanupmetricsEnabled: false
@@ -22,8 +22,15 @@ camunda.bpm.admin-user:
   id: demo
   password: demo
 
+
+
 camunda.bpm.client:
   base-url: http://localhost:8081/engine-rest
   subscriptions:
     getFact:
       include-extension-properties: true
+
+camunda.bpm.job-execution:
+  lock-time-in-millis: 20000
+  wait-time-in-millis: 1
+  max-wait: 1
